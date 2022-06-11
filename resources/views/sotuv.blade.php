@@ -330,7 +330,7 @@
             </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="nazad">Назад</button>
-          <button type="submit" class="btn btn-success" id="oplata">Оплаты</button>
+          <button type="submit" class="btn btn-success" id="oplataed">Оплаты</button>
         </div>
    
       </div>
@@ -718,8 +718,7 @@ function kursm(){
             }
         });
 
-
-        $("#oplata").on('click', function(){
+        $("#oplataed").on('click', function(){
             let _token = $('meta[name="csrf-token"]').attr('content');
             var itogs = $("#itogs").val();
             var naqt = $("#naqt").val();
@@ -773,43 +772,76 @@ function kursm(){
             }else{
                 if(naqt || plastik || bank){
                     if(karzs > 0){
-                        if(clentra){
-                            $.ajax({
-                                url: "{{ route('oplata') }}",
-                                type: 'POST',
-                                data:{
-                                    id: clentra,
-                                    itogs: itogs,
-                                    naqt: naqt,
-                                    plastik: plastik,
-                                    bank: bank,
-                                    karzs: karzs,
-                                    _token: _token
-                                },
-                                success: function(data) {
-                                    if(data.code == 0){
-                                        toastr.error(data.msg).fadeOut(2000);
-                                    }else{
-                                        fetch_customer_data();
-                                        fetch_customer_data2();
-                                        $("#itog2").val(data.itogo);
-                                        $("#itog").val(data.itogo);
-                                        $("#belgi").val('');
-                                        $("#belgi2").val('');
-                                        $("#itogs").val("");
-                                        $("#naqt").val("");
-                                        $("#plastik").val("");
-                                        $("#bank").val("");
-                                        $("#karzs").val("");
-                                        $("#clentra").val("");
-                                        toastr.success("Малумотлар сакланди").fadeOut(2000);
-                                        $("#jonatish").modal("hide");
-                                    }
+                        $.ajax({
+                            url: "{{ route('oplata') }}",
+                            type: 'POST',
+                            data:{
+                                id: clentra,
+                                itogs: itogs,
+                                naqt: naqt,
+                                plastik: plastik,
+                                bank: bank,
+                                karzs: karzs,
+                                _token: _token
+                            },
+                            success: function(data) {
+                                if(data.code == 0){
+                                    toastr.error(data.msg).fadeOut(2000);
+                                }else{
+                                    fetch_customer_data();
+                                    fetch_customer_data2();
+                                    $("#itog2").val(data.itogo);
+                                    $("#itog").val(data.itogo);
+                                    $("#belgi").val('');
+                                    $("#belgi2").val('');
+                                    $("#itogs").val("");
+                                    $("#naqt").val("");
+                                    $("#plastik").val("");
+                                    $("#bank").val("");
+                                    $("#karzs").val("");
+                                    $("#clentra").val("");
+                                    toastr.success("Малумотлар сакланди").fadeOut(2000);
+                                    $("#jonatish").modal("hide");
                                 }
-                            });
-                        }else{
-                            toastr.error("Клентни танланг").fadeOut(2000);
-                        }
+                            }
+                        });
+                    }
+                    if(clentra){
+                        $.ajax({
+                            url: "{{ route('oplata') }}",
+                            type: 'POST',
+                            data:{
+                                id: clentra,
+                                itogs: itogs,
+                                naqt: naqt,
+                                plastik: plastik,
+                                bank: bank,
+                                karzs: karzs,
+                                _token: _token
+                            },
+                            success: function(data) {
+                                if(data.code == 0){
+                                    toastr.error(data.msg).fadeOut(2000);
+                                }else{
+                                    fetch_customer_data();
+                                    fetch_customer_data2();
+                                    $("#itog2").val(data.itogo);
+                                    $("#itog").val(data.itogo);
+                                    $("#belgi").val('');
+                                    $("#belgi2").val('');
+                                    $("#itogs").val("");
+                                    $("#naqt").val("");
+                                    $("#plastik").val("");
+                                    $("#bank").val("");
+                                    $("#karzs").val("");
+                                    $("#clentra").val("");
+                                    toastr.success("Малумотлар сакланди").fadeOut(2000);
+                                    $("#jonatish").modal("hide");
+                                }
+                            }
+                        });
+                    }else{
+                        toastr.error("Клентни танланг").fadeOut(2000);
                     }
                 }else{
                     toastr.error("Устунлар бош").fadeOut(2000);

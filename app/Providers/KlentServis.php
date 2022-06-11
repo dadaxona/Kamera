@@ -27,9 +27,14 @@ class KlentServis extends KlentServis2
         if($request->id){
             return $this->update($request);        
         }else{
-            $data = User::create($request->all());
+            $data = User::create([
+                'name'=>$request->name,
+                'tel'=>$request->tel,
+                'firma'=>$request->firma,
+                'inn'=>$request->inn,
+            ]);
             if($data){
-                return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $data], 200);
+                return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $request], 200);
             }
         }
     }
