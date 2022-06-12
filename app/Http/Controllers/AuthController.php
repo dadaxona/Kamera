@@ -105,4 +105,29 @@ class AuthController extends Controller
             return redirect('/');
         }
     }
+
+    public function profil()
+    {
+        if(Session::has('IDIE')){
+            $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
+            return view('auth.password',[
+                'brends'=>$brends,
+            ]);
+        }else{
+            return redirect('/logaut');
+        }
+        
+    }
+
+    public function setting()
+    {
+        if(Session::has('IDIE')){
+            $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
+            return view('auth.setting',[
+                'brends'=>$brends,
+            ]);
+        }else{
+            return redirect('/logaut');
+        }
+    }
 }

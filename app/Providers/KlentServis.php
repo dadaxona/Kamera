@@ -7,6 +7,7 @@ use App\Models\Arxiv;
 use App\Models\Deletkarzina;
 use App\Models\Drektor;
 use App\Models\Ichkitavar;
+use App\Models\Ishchilar;
 use App\Models\Tavar;
 use App\Models\Umumiy;
 use App\Models\Updatetavr;
@@ -39,10 +40,55 @@ class KlentServis extends KlentServis2
         }
     }
 
+    public function storeishchi($request)
+    {
+        if($request->id){
+            return $this->updateishchi($request);        
+        }else{
+            $data = Ishchilar::create([                
+                'name'=>$request->name,
+                'login'=>$request->login,
+                'password'=>$request->password,
+            ]);
+            if($data){
+                return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $request], 200);
+            }
+        }
+    }
+
+    public function storeadmin($request)
+    {
+        if($request->id){
+            return $this->updateadmin($request);
+        }else{
+            $data = Drektor::create([
+                'login'=>$request->login,
+                'password'=>$request->password,
+            ]);
+            if($data){
+                return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $request], 200);
+            }
+        }
+    }
+
     public function update($request)
     {
         User::find($request->id)->update($request->all());
         $data = User::find($request->id);
+        return response()->json(['code'=>201, 'msg'=>'Мувофакиятли янгиланди','data' => $data], 201);
+    }
+
+    public function updateishchi($request)
+    {
+        Ishchilar::find($request->id)->update($request->all());
+        $data = Ishchilar::find($request->id);
+        return response()->json(['code'=>201, 'msg'=>'Мувофакиятли янгиланди','data' => $data], 201);
+    }
+
+    public function updateadmin($request)
+    {
+        Drektor::find($request->id)->update($request->all());
+        $data = Drektor::find($request->id);
         return response()->json(['code'=>201, 'msg'=>'Мувофакиятли янгиланди','data' => $data], 201);
     }
 
@@ -52,8 +98,18 @@ class KlentServis extends KlentServis2
         return response()->json(['msg'=>'Мувофакиятли очирилди']);
     }
 
-
-    // 2
+    public function deleteishchi($id)
+    {
+        Ishchilar::find($id)->delete($id);
+        return response()->json(['msg'=>'Мувофакиятли очирилди']);
+    }
+    
+    public function deleteadmin($id)
+    {
+        Drektor::find($id)->delete($id);
+        return response()->json(['msg'=>'Мувофакиятли очирилди']);
+    }
+    
     public function store2($request)
     {
         foreach ($request->addmore as $value) {

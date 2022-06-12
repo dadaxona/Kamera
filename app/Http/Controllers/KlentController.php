@@ -18,6 +18,7 @@ use App\Models\Updatetavr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\KlentController2;
+use App\Models\Ishchilar;
 use App\Models\Sqladpoytaxt;
 use App\Models\Tavar2;
 use App\Models\Tayyorsqlad;
@@ -264,6 +265,122 @@ class KlentController extends KlentController2
         }
     }
 
+    public function live_admin(Request $request)
+    {
+        if($request->ajax())
+        {
+        $output = '';
+        $query = $request->get('query');
+        if($query != '')
+        {
+        $data = Drektor::where('login', 'like', '%'.$query.'%')
+                        ->orderBy('id', 'DESC')
+                        ->get();            
+        }
+        else
+        {
+        $data = Drektor::orderBy('id', 'DESC')->get();
+        }
+        $total_row = $data->count();
+        if($total_row > 0)
+        {
+            foreach($data as $row)
+            {
+                $output .= '
+                <tr id="row_'.$row->id.'" style="border-bottom: 1px solid;">
+                <td>'.$row->login.'</td>
+                <td>'.$row->password.'</td>            
+                <td>
+                  <a href="javascript:void(0)" onclick="editPost('.$row->id.')" style="color: green">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+                      <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                    </svg>
+                  </a>                            
+                  <a href="javascript:void(0)" onclick="deletePost('.$row->id.')" class="mx-3" style="color: red">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                      <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                    </svg>
+                  </a>
+                </td>
+              </tr>
+              ';
+            }
+        }
+        else
+        {
+        $output = '
+            <tr>
+                <td align="center" colspan="4">No Data Found</td>
+            </tr>
+            ';
+        }
+        $data = array(
+            'table_data'  => $output,
+        );
+
+        echo json_encode($data);
+        }
+    }
+
+
+    public function live_ishchi(Request $request)
+    {
+        if($request->ajax())
+        {
+        $output = '';
+        $query = $request->get('query');
+        if($query != '')
+        {
+        $data = Ishchilar::where('name', 'like', '%'.$query.'%')
+                        ->orderBy('id', 'DESC')
+                        ->get();            
+        }
+        else
+        {
+        $data = Ishchilar::orderBy('id', 'DESC')->get();
+        }
+        $total_row = $data->count();
+        if($total_row > 0)
+        {
+            foreach($data as $row)
+            {
+                $output .= '
+                <tr id="row_'.$row->id.'" style="border-bottom: 1px solid;">
+                <td>'.$row->name.'</td>
+                <td>'.$row->login.'</td>
+                <td>'.$row->password.'</td>            
+                <td>
+                  <a href="javascript:void(0)" onclick="editPost('.$row->id.')" style="color: green">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+                      <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                    </svg>
+                  </a>                            
+                  <a href="javascript:void(0)" onclick="deletePost('.$row->id.')" class="mx-3" style="color: red">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                      <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                    </svg>
+                  </a>
+                </td>
+              </tr>
+              ';
+            }
+        }
+        else
+        {
+        $output = '
+            <tr>
+                <td align="center" colspan="4">No Data Found</td>
+            </tr>
+            ';
+        }
+        $data = array(
+            'table_data'  => $output,
+        );
+
+        echo json_encode($data);
+        }
+    }
+
     public function index()
     {
         if(Session::has('IDIE')){
@@ -305,18 +422,66 @@ class KlentController extends KlentController2
         }
     }
 
+    public function storeishchi(Request $request, KlentServis $model)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'login' => 'required',
+            'password' => 'required',
+        ]);
+        if($validator->passes()){
+            return $model->storeishchi($request);
+        }else{            
+            return response()->json(['code'=>0, 'msg'=>'Малумотларни толдирилмаган', 'error'=>$validator->errors()->toArray()]);
+        }
+    }
+    
+    public function storeadmin(Request $request, KlentServis $model)
+    {
+        $validator = Validator::make($request->all(), [
+            'login' => 'required',
+            'password' => 'required',
+        ]);
+        if($validator->passes()){
+            return $model->storeadmin($request);
+        }else{            
+            return response()->json(['code'=>0, 'msg'=>'Малумотларни толдирилмаган', 'error'=>$validator->errors()->toArray()]);
+        }
+    }
+    
     public function show($id)
     {
         $post = User::find($id);    
         return response()->json($post);
     }
 
+    public function showishchi($id)
+    {
+        $post = Ishchilar::find($id);    
+        return response()->json($post);
+    }
 
+    public function showadmin($id)
+    {
+        $post = Drektor::find($id);    
+        return response()->json($post);
+    }
+    
     public function destroy($id, KlentServis $model)
     {
         return $model->delete($id);
     }
 
+    public function deleteishchi($id, KlentServis $model)
+    {
+        return $model->deleteishchi($id);
+    }
+
+    public function deleteadmin($id, KlentServis $model)
+    {
+        return $model->deleteadmin($id);
+    }
+    
     public function store2(Request $request, KlentServis $model)
     {
         $validator = Validator::make($request->all(), [

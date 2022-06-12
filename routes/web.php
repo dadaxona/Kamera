@@ -21,17 +21,27 @@ Route::get('/', [AuthController::class,'login']);
 Route::post('login-user', [AuthController::class,'loginuser'])->name('login-user');
 Route::get('/glavninachal', [AuthController::class,'dashbord'])->middleware('isLog');
 Route::get('/logaut', [AuthController::class,'logaut']);
+Route::get('/profil', [AuthController::class,'profil'])->name('profil');
+Route::get('/setting', [AuthController::class,'setting'])->name('setting');
 
 Route::get('tavar_live', [KlentController::class, 'tavar_live'])->name('tavar_live');
 Route::get('tavar2_live', [KlentController::class, 'tavar2_live'])->name('tavar2_live');
 Route::get('live_adress', [KlentController::class, 'live_adress'])->name('live_adress');
 Route::get('live_clent', [KlentController::class, 'live_clent'])->name('live_clent');
+Route::get('live_admin', [KlentController::class, 'live_admin'])->name('live_admin');
+Route::get('live_ishchi', [KlentController::class, 'live_ishchi'])->name('live_ishchi');
 Route::get('index', [KlentController::class, 'index'])->name('index');
 Route::get('indextip', [KlentController::class, 'indextip'])->name('indextip');
 Route::post('store', [KlentController::class, 'store'])->name('store');
+Route::post('storeishchi', [KlentController::class, 'storeishchi'])->name('storeishchi');
+Route::post('storeadmin', [KlentController::class, 'storeadmin'])->name('storeadmin');
 Route::get('show/{id}', [KlentController::class, 'show']);
+Route::get('showishchi/{id}', [KlentController::class, 'showishchi']);
+Route::get('showadmin/{id}', [KlentController::class, 'showadmin']);
 Route::post('update', [KlentController::class, 'update'])->name('update');
 Route::post('delete/{id}', [KlentController::class, 'destroy']);
+Route::post('deleteishchi/{id}', [KlentController::class, 'deleteishchi']);
+Route::post('deleteadmin/{id}', [KlentController::class, 'deleteadmin']);
 
 Route::post('store2', [KlentController::class, 'store2'])->name('store2');
 Route::post('store2tip', [KlentController::class, 'store2tip'])->name('store2tip');
