@@ -13,27 +13,26 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tayyorsqlads', function (Blueprint $table) {
+        Schema::create('updatetavrps', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('tavar_id')->unsigned();
+            $table->bigInteger('tavarp_id')->unsigned();
+            $table->bigInteger('tayyorsqlad_id')->unsigned();
             $table->string('adress')->nullable();
-            $table->bigInteger('tavar2_id')->unsigned();
-            $table->string('name')->nullable();
+            $table->bigInteger('tavar2p_id')->unsigned();
             $table->string('raqam')->nullable();
             $table->integer('hajm')->nullable();
             $table->integer('summa')->nullable();
             $table->integer('summa2')->nullable();
             $table->integer('summa3')->nullable();
-            $table->integer('kurs')->nullable();
-            $table->integer('kurs2')->nullable();
             $table->timestamps();
-            $table->foreign('tavar_id')->references('id')->on('tavars')
+            $table->foreign('tavarp_id')->references('id')->on('tavarps')
             ->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('tavar2_id')->references('id')->on('tavar2s')
+            $table->foreign('tayyorsqlad_id')->references('id')->on('tayyorsqlads')
+            ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('tavar2p_id')->references('id')->on('tavar2ps')
             ->onDelete('cascade')->onUpdate('cascade');
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -41,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tayyorsqlads');
+        Schema::dropIfExists('updatetavrps');
     }
 };

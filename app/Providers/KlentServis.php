@@ -18,6 +18,8 @@ use App\Models\Karzina;
 use App\Models\Karzina2;
 use App\Models\Karzina3;
 use App\Models\Tavar2;
+use App\Models\Tavar2p;
+use App\Models\Tavarp;
 use App\Models\Zakaz;
 use App\Models\Zakaz2;
 use Illuminate\Support\Facades\Session;
@@ -114,6 +116,7 @@ class KlentServis extends KlentServis2
     {
         foreach ($request->addmore as $value) {
             $data = Tavar::create($value);
+            $data = Tavarp::create($value);
         }
         if($data){
             return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $data], 200);
@@ -124,6 +127,10 @@ class KlentServis extends KlentServis2
     {
         foreach ($request->addmore as $value) {
             $data = Tavar2::create($value);
+            Tavar2p::create([
+                'tavarp_id'=>$value["tavar_id"],
+                'name'=>$value["name"],
+            ]);
         }
         if($data){
             return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $data], 200);
