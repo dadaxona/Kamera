@@ -315,6 +315,7 @@
                 </div>
                 <div class="form-check">
                     <input type="hidden" id="checkshidden">
+                    <input type="hidden" id="chechidden">
                     <div class="mb-3 d-flex">
                         <div class="col-4 mt-2">
                             <input class="form-check-input" type="checkbox" name="exampleRadios" id="checks" value="1">
@@ -325,6 +326,12 @@
                         <div class="col-8">
                             <input type="text" class="form-control text-right itogsw" id="malumot">
                         </div>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" value="1">
+                        <label class="form-check-label">
+                            Чек дайтиь
+                        </label>
                     </div>
                 </div>
             </div>
@@ -531,6 +538,17 @@ function kursm(){
             $("#checkshidden").val(son);
         }
     });
+
+    $(document).on('click', '#flexSwitchCheckDefault', function(){
+        var son = $("#flexSwitchCheckDefault").val();
+        var ch = $("#chechidden").val();
+        if(ch == 1){
+          $("#chechidden").val(0);
+        }
+        if(ch == 0){
+            $("#chechidden").val(son);
+        }
+    });                
 
     $(document).ready(function(){
         $(document).on('keyup', '#son', function(){
@@ -743,6 +761,7 @@ function kursm(){
             var clentra = $("#clentra").val();
             var checks = $("#checkshidden").val();
             var malumot = $("#malumot").val();
+            var ch = $("#chechidden").val();
             if(checks == 1){
                 if(malumot){
                     $.ajax({
@@ -787,76 +806,79 @@ function kursm(){
             }else{
                 if(naqt || plastik || bank){
                     if(karzs > 0){
-                        $.ajax({
-                            url: "{{ route('oplata') }}",
-                            type: 'POST',
-                            data:{
-                                id: clentra,
-                                itogs: itogs,
-                                naqt: naqt,
-                                plastik: plastik,
-                                bank: bank,
-                                karzs: karzs,
-                                _token: _token
-                            },
-                            success: function(data) {
-                                if(data.code == 0){
-                                    toastr.error(data.msg).fadeOut(2000);
-                                }else{
-                                    fetch_customer_data();
-                                    fetch_customer_data2();
-                                    $("#itog2").val(data.itogo);
-                                    $("#itog").val(data.itogo);
-                                    $("#belgi").val('');
-                                    $("#belgi2").val('');
-                                    $("#itogs").val("");
-                                    $("#naqt").val("");
-                                    $("#plastik").val("");
-                                    $("#bank").val("");
-                                    $("#karzs").val("");
-                                    $("#clentra").val("");
-                                    toastr.success("Малумотлар сакланди").fadeOut(2000);
-                                    $("#jonatish").modal("hide");
+                        if(clentra){
+                            $.ajax({
+                                url: "{{ route('oplata') }}",
+                                type: 'POST',
+                                data:{
+                                    id: clentra,
+                                    itogs: itogs,
+                                    naqt: naqt,
+                                    plastik: plastik,
+                                    bank: bank,
+                                    karzs: karzs,
+                                    ch: ch,
+                                    _token: _token
+                                },
+                                success: function(data) {
+                                    if(data.code == 0){
+                                        toastr.error(data.msg).fadeOut(2000);
+                                    }else{
+                                        fetch_customer_data();
+                                        fetch_customer_data2();
+                                        $("#itog2").val(data.itogo);
+                                        $("#itog").val(data.itogo);
+                                        $("#belgi").val('');
+                                        $("#belgi2").val('');
+                                        $("#itogs").val("");
+                                        $("#naqt").val("");
+                                        $("#plastik").val("");
+                                        $("#bank").val("");
+                                        $("#karzs").val("");
+                                        $("#clentra").val("");
+                                        toastr.success("Малумотлар сакланди").fadeOut(2000);
+                                        $("#jonatish").modal("hide");
+                                    }
                                 }
-                            }
-                        });
-                    }
-                    if(clentra){
-                        $.ajax({
-                            url: "{{ route('oplata') }}",
-                            type: 'POST',
-                            data:{
-                                id: clentra,
-                                itogs: itogs,
-                                naqt: naqt,
-                                plastik: plastik,
-                                bank: bank,
-                                karzs: karzs,
-                                _token: _token
-                            },
-                            success: function(data) {
-                                if(data.code == 0){
-                                    toastr.error(data.msg).fadeOut(2000);
-                                }else{
-                                    fetch_customer_data();
-                                    fetch_customer_data2();
-                                    $("#itog2").val(data.itogo);
-                                    $("#itog").val(data.itogo);
-                                    $("#belgi").val('');
-                                    $("#belgi2").val('');
-                                    $("#itogs").val("");
-                                    $("#naqt").val("");
-                                    $("#plastik").val("");
-                                    $("#bank").val("");
-                                    $("#karzs").val("");
-                                    $("#clentra").val("");
-                                    toastr.success("Малумотлар сакланди").fadeOut(2000);
-                                    $("#jonatish").modal("hide");
-                                }
-                            }
-                        });
+                            });
+                        }else{
+                            toastr.error("Клентни танланг").fadeOut(2000);
+                        }
                     }else{
-                        toastr.error("Клентни танланг").fadeOut(2000);
+                        $.ajax({
+                            url: "{{ route('oplata') }}",
+                            type: 'POST',
+                            data:{
+                                id: clentra,
+                                itogs: itogs,
+                                naqt: naqt,
+                                plastik: plastik,
+                                bank: bank,
+                                karzs: karzs,
+                                ch: ch,
+                                _token: _token
+                            },
+                            success: function(data) {
+                                if(data.code == 0){
+                                    toastr.error(data.msg).fadeOut(2000);
+                                }else{
+                                    fetch_customer_data();
+                                    fetch_customer_data2();
+                                    $("#itog2").val(data.itogo);
+                                    $("#itog").val(data.itogo);
+                                    $("#belgi").val('');
+                                    $("#belgi2").val('');
+                                    $("#itogs").val("");
+                                    $("#naqt").val("");
+                                    $("#plastik").val("");
+                                    $("#bank").val("");
+                                    $("#karzs").val("");
+                                    $("#clentra").val("");
+                                    toastr.success("Малумотлар сакланди").fadeOut(2000);
+                                    $("#jonatish").modal("hide");
+                                }
+                            }
+                        });
                     }
                 }else{
                     toastr.error("Устунлар бош").fadeOut(2000);

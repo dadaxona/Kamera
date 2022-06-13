@@ -851,7 +851,7 @@ class KlentServis extends KlentServis2
                 ]);
                 $b2 = Itogo::find(1);
                 Karzina::where('id',">",0)->delete();
-                return response()->json(['data'=>$b2]);
+                return $this->respon($request, $b2);
             }else{
                 $variable = Karzina::all();
                 foreach ($variable as $value) {
@@ -877,7 +877,7 @@ class KlentServis extends KlentServis2
                 ]);
                 $b2 = Itogo::find(1);
                 Karzina::where('id',">",0)->delete();
-                return response()->json(['data'=>$b2]);
+                return $this->respon($request, $b2);
             }
         }else{
             if($request->id){
@@ -915,7 +915,7 @@ class KlentServis extends KlentServis2
                 ]);
                 $b2 = Itogo::find(1);
                 Karzina::where('id',">",0)->delete();
-                return response()->json(['data'=>$b2]);
+                return $this->respon($request, $b2);
             }else{
                 $variable = Karzina::all();
                 foreach ($variable as $value) {
@@ -941,8 +941,17 @@ class KlentServis extends KlentServis2
                 ]);
                 $b2 = Itogo::find(1);
                 Karzina::where('id',">",0)->delete();
-                return response()->json(['data'=>$b2]);
+                return $this->respon($request, $b2);
             }
+        }
+    }
+
+    public function respon($request, $b2)
+    {
+        if($request->ch == 1){
+            return response()->json(['data'=>$b2]);
+        }else{
+            return response()->json(['data'=>$b2]);
         }
     }
 
