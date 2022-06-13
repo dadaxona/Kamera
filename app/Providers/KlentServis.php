@@ -116,7 +116,7 @@ class KlentServis extends KlentServis2
     {
         foreach ($request->addmore as $value) {
             $data = Tavar::create($value);
-            $data = Tavarp::create($value);
+            Tavarp::create($value);
         }
         if($data){
             return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $data], 200);
