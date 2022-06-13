@@ -187,6 +187,10 @@
   </div>
   
 <script>
+
+$( function() {
+    $( "#tbody3" ).selectable();
+  } );
     $(document).ready(function(){
         fetch_customer_data();
         function fetch_customer_data(query = '')

@@ -95,7 +95,7 @@ class KlentController2 extends Controller
             {
                 $output .= '
                 <tr data-id="'.$row->id.'" id="data2" style="cursor: pointer;" style="border-bottom: 1px solid;">
-                    <td>'.$row->malumot.'</td>
+                    <td class="ui-widget-content">'.$row->malumot.'</td>
                 </tr>
                 ';
             }
@@ -125,12 +125,12 @@ class KlentController2 extends Controller
             {
                 $output .= '
                 <tr style="border-bottom: 1px solid;">
-                    <td>'.$row->zakaz->malumot.'</td>
-                    <td>'.$row->name.'</td>
-                    <td>'.$row->summa2.'</td>
-                    <td>'.$row->soni.'</td>
-                    <td>'.$row->chegirma.'</td>
-                    <td>'.$row->itog.'</td>
+                    <td class="ui-widget-content">'.$row->zakaz->malumot.'</td>
+                    <td class="ui-widget-content">'.$row->name.'</td>
+                    <td class="ui-widget-content">'.$row->summa2.'</td>
+                    <td class="ui-widget-content">'.$row->soni.'</td>
+                    <td class="ui-widget-content">'.$row->chegirma.'</td>
+                    <td class="ui-widget-content">'.$row->itog.'</td>
                 </tr>
                 ';
             }
@@ -168,7 +168,7 @@ class KlentController2 extends Controller
             {
                 $output .= '
                 <tr data-id="'.$row->id.'" id="data22" style="cursor: pointer;" style="border-bottom: 1px solid;">
-                    <td>'.$row->name.'</td>
+                    <td class="ui-widget-content">'.$row->name.'</td>
                 </tr>
                 ';
             }
@@ -199,12 +199,12 @@ class KlentController2 extends Controller
             {
                 $output .= '
                 <tr style="border-bottom: 1px solid;">
-                    <td>'.$row->user->name.'</td>
-                    <td>'.$row->name.'</td>
-                    <td>'.$row->summa2.'</td>
-                    <td>'.$row->soni.'</td>
-                    <td>'.$row->chegirma.'</td>
-                    <td>'.$row->itog.'</td>
+                    <td class="ui-widget-content">'.$row->user->name.'</td>
+                    <td class="ui-widget-content">'.$row->name.'</td>
+                    <td class="ui-widget-content">'.$row->summa2.'</td>
+                    <td class="ui-widget-content">'.$row->soni.'</td>
+                    <td class="ui-widget-content">'.$row->chegirma.'</td>
+                    <td class="ui-widget-content">'.$row->itog.'</td>
                 </tr>
                 ';
             }
@@ -310,7 +310,7 @@ class KlentController2 extends Controller
             {
                 $output .= '
                 <tr data-id="'.$row->id.'" id="data" style="cursor: pointer;" style="border-bottom: 1px solid;">
-                    <td>'.$row->name.'</td>
+                    <td class="ui-widget-content">'.$row->name.'</td>
                 </tr>
                 ';
             }
@@ -351,13 +351,13 @@ class KlentController2 extends Controller
             {
                 $output .= '
                 <tr style="border-bottom: 1px solid;">
-                    <td>'.$row->tavar->name.'</td>
-                    <td>'.$row->raqam.'</td>
-                    <td>'.$row->soni.'</td>
-                    <td>'.$row->summa2.'</td>
-                    <td>'.$row->chegirma.'</td>
-                    <td>'.$row->itog.'</td>
-                    <td>'.$row->updated_at.'</td>
+                    <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                    <td class="ui-widget-content">'.$row->raqam.'</td>
+                    <td class="ui-widget-content">'.$row->soni.'</td>
+                    <td class="ui-widget-content">'.$row->summa2.'</td>
+                    <td class="ui-widget-content">'.$row->chegirma.'</td>
+                    <td class="ui-widget-content">'.$row->itog.'</td>
+                    <td class="ui-widget-content">'.$row->updated_at.'</td>
                 </tr>
                 ';
             }
@@ -392,14 +392,14 @@ class KlentController2 extends Controller
                 {
                     $output .= '
                     <tr style="border-bottom: 1px solid;">
-                        <td>'.$row->user->name.'</td>
-                        <td>'.$row->tavar->name.'</td>
-                        <td>'.$row->raqam.'</td>
-                        <td>'.$row->soni.'</td>
-                        <td>'.$row->summa2.'</td>
-                        <td>'.$row->chegirma.'</td>
-                        <td>'.$row->itog.'</td>
-                        <td>'.$row->updated_at.'</td>
+                        <td class="ui-widget-content">'.$row->user->name.'</td>
+                        <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                        <td class="ui-widget-content">'.$row->raqam.'</td>
+                        <td class="ui-widget-content">'.$row->soni.'</td>
+                        <td class="ui-widget-content">'.$row->summa2.'</td>
+                        <td class="ui-widget-content">'.$row->chegirma.'</td>
+                        <td class="ui-widget-content">'.$row->itog.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
                     </tr>
                     ';
                 }
@@ -407,13 +407,13 @@ class KlentController2 extends Controller
                 {
                     $output2 .= '
                     <tr style="border-bottom: 1px solid;">
-                        <td>'.$row->user->name.'</td>
-                        <td>'.$row->itogs.'</td>
-                        <td>'.$row->naqt.'</td>
-                        <td>'.$row->plastik.'</td>
-                        <td>'.$row->bank.'</td>
-                        <td>'.$row->karzs.'</td>
-                        <td>'.$row->updated_at.'</td>
+                        <td class="ui-widget-content">'.$row->user->name.'</td>
+                        <td class="ui-widget-content">'.$row->itogs.'</td>
+                        <td class="ui-widget-content">'.$row->naqt.'</td>
+                        <td class="ui-widget-content">'.$row->plastik.'</td>
+                        <td class="ui-widget-content">'.$row->bank.'</td>
+                        <td class="ui-widget-content">'.$row->karzs.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
                     </tr>
                     ';
                 }
@@ -505,14 +505,14 @@ class KlentController2 extends Controller
                 {
                     $output .= '
                     <tr style="border-bottom: 1px solid;">
-                        <td>'.$row->user->name.'</td>
-                        <td>'.$row->tavar->name.'</td>
-                        <td>'.$row->raqam.'</td>
-                        <td>'.$row->soni.'</td>
-                        <td>'.$row->summa2.'</td>
-                        <td>'.$row->chegirma.'</td>
-                        <td>'.$row->itog.'</td>
-                        <td>'.$row->updated_at.'</td>
+                        <td class="ui-widget-content">'.$row->user->name.'</td>
+                        <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                        <td class="ui-widget-content">'.$row->raqam.'</td>
+                        <td class="ui-widget-content">'.$row->soni.'</td>
+                        <td class="ui-widget-content">'.$row->summa2.'</td>
+                        <td class="ui-widget-content">'.$row->chegirma.'</td>
+                        <td class="ui-widget-content">'.$row->itog.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
                     </tr>
                     ';
                 }
@@ -520,13 +520,13 @@ class KlentController2 extends Controller
                 {
                     $output2 .= '
                     <tr style="border-bottom: 1px solid;">
-                        <td>'.$row->user->name.'</td>
-                        <td>'.$row->itogs.'</td>
-                        <td>'.$row->naqt.'</td>
-                        <td>'.$row->plastik.'</td>
-                        <td>'.$row->bank.'</td>
-                        <td>'.$row->karzs.'</td>
-                        <td>'.$row->updated_at.'</td>
+                        <td class="ui-widget-content">'.$row->user->name.'</td>
+                        <td class="ui-widget-content">'.$row->itogs.'</td>
+                        <td class="ui-widget-content">'.$row->naqt.'</td>
+                        <td class="ui-widget-content">'.$row->plastik.'</td>
+                        <td class="ui-widget-content">'.$row->bank.'</td>
+                        <td class="ui-widget-content">'.$row->karzs.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
                     </tr>
                     ';
                 }
@@ -653,14 +653,14 @@ class KlentController2 extends Controller
                 {
                     $output .= '
                     <tr style="border-bottom: 1px solid;">
-                        <td>'.$row->user->name.'</td>
-                        <td>'.$row->tavar->name.'</td>
-                        <td>'.$row->raqam.'</td>
-                        <td>'.$row->soni.'</td>
-                        <td>'.$row->summa2.'</td>
-                        <td>'.$row->chegirma.'</td>
-                        <td>'.$row->itog.'</td>
-                        <td>'.$row->updated_at.'</td>
+                        <td class="ui-widget-content">'.$row->user->name.'</td>
+                        <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                        <td class="ui-widget-content">'.$row->raqam.'</td>
+                        <td class="ui-widget-content">'.$row->soni.'</td>
+                        <td class="ui-widget-content">'.$row->summa2.'</td>
+                        <td class="ui-widget-content">'.$row->chegirma.'</td>
+                        <td class="ui-widget-content">'.$row->itog.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
                     </tr>
                     ';
                 }
@@ -668,13 +668,13 @@ class KlentController2 extends Controller
                 {
                     $output2 .= '
                     <tr style="border-bottom: 1px solid;">
-                        <td>'.$row->user->name.'</td>
-                        <td>'.$row->itogs.'</td>
-                        <td>'.$row->naqt.'</td>
-                        <td>'.$row->plastik.'</td>
-                        <td>'.$row->bank.'</td>
-                        <td>'.$row->karzs.'</td>
-                        <td>'.$row->updated_at.'</td>
+                        <td class="ui-widget-content">'.$row->user->name.'</td>
+                        <td class="ui-widget-content">'.$row->itogs.'</td>
+                        <td class="ui-widget-content">'.$row->naqt.'</td>
+                        <td class="ui-widget-content">'.$row->plastik.'</td>
+                        <td class="ui-widget-content">'.$row->bank.'</td>
+                        <td class="ui-widget-content">'.$row->karzs.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
                     </tr>
                     ';
                 }
@@ -769,14 +769,14 @@ class KlentController2 extends Controller
                 {
                     $output .= '
                     <tr style="border-bottom: 1px solid;">
-                        <td>'.$row->user->name.'</td>
-                        <td>'.$row->tavar->name.'</td>
-                        <td>'.$row->raqam.'</td>
-                        <td>'.$row->soni.'</td>
-                        <td>'.$row->summa2.'</td>
-                        <td>'.$row->chegirma.'</td>
-                        <td>'.$row->itog.'</td>
-                        <td>'.$row->updated_at.'</td>
+                        <td class="ui-widget-content">'.$row->user->name.'</td>
+                        <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                        <td class="ui-widget-content">'.$row->raqam.'</td>
+                        <td class="ui-widget-content">'.$row->soni.'</td>
+                        <td class="ui-widget-content">'.$row->summa2.'</td>
+                        <td class="ui-widget-content">'.$row->chegirma.'</td>
+                        <td class="ui-widget-content">'.$row->itog.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
                     </tr>
                     ';
                 }
@@ -784,13 +784,13 @@ class KlentController2 extends Controller
                 {
                     $output2 .= '
                     <tr style="border-bottom: 1px solid;">
-                        <td>'.$row->user->name.'</td>
-                        <td>'.$row->itogs.'</td>
-                        <td>'.$row->naqt.'</td>
-                        <td>'.$row->plastik.'</td>
-                        <td>'.$row->bank.'</td>
-                        <td>'.$row->karzs.'</td>
-                        <td>'.$row->updated_at.'</td>
+                        <td class="ui-widget-content">'.$row->user->name.'</td>
+                        <td class="ui-widget-content">'.$row->itogs.'</td>
+                        <td class="ui-widget-content">'.$row->naqt.'</td>
+                        <td class="ui-widget-content">'.$row->plastik.'</td>
+                        <td class="ui-widget-content">'.$row->bank.'</td>
+                        <td class="ui-widget-content">'.$row->karzs.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
                     </tr>
                     ';
                 }
@@ -884,14 +884,14 @@ class KlentController2 extends Controller
                     {
                         $output .= '
                         <tr style="border-bottom: 1px solid;">
-                            <td>'.$row->user->name.'</td>
-                            <td>'.$row->tavar->name.'</td>
-                            <td>'.$row->raqam.'</td>
-                            <td>'.$row->soni.'</td>
-                            <td>'.$row->summa2.'</td>
-                            <td>'.$row->chegirma.'</td>
-                            <td>'.$row->itog.'</td>
-                            <td>'.$row->updated_at.'</td>
+                            <td class="ui-widget-content">'.$row->user->name.'</td>
+                            <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                            <td class="ui-widget-content">'.$row->raqam.'</td>
+                            <td class="ui-widget-content">'.$row->soni.'</td>
+                            <td class="ui-widget-content">'.$row->summa2.'</td>
+                            <td class="ui-widget-content">'.$row->chegirma.'</td>
+                            <td class="ui-widget-content">'.$row->itog.'</td>
+                            <td class="ui-widget-content">'.$row->updated_at.'</td>
                         </tr>
                         ';
                     }
@@ -899,13 +899,13 @@ class KlentController2 extends Controller
                     {
                         $output2 .= '
                         <tr style="border-bottom: 1px solid;">
-                            <td>'.$row->user->name.'</td>
-                            <td>'.$row->itogs.'</td>
-                            <td>'.$row->naqt.'</td>
-                            <td>'.$row->plastik.'</td>
-                            <td>'.$row->bank.'</td>
-                            <td>'.$row->karzs.'</td>
-                            <td>'.$row->updated_at.'</td>
+                            <td class="ui-widget-content">'.$row->user->name.'</td>
+                            <td class="ui-widget-content">'.$row->itogs.'</td>
+                            <td class="ui-widget-content">'.$row->naqt.'</td>
+                            <td class="ui-widget-content">'.$row->plastik.'</td>
+                            <td class="ui-widget-content">'.$row->bank.'</td>
+                            <td class="ui-widget-content">'.$row->karzs.'</td>
+                            <td class="ui-widget-content">'.$row->updated_at.'</td>
                         </tr>
                         ';
                     }
@@ -994,14 +994,14 @@ class KlentController2 extends Controller
                     {
                         $output .= '
                         <tr style="border-bottom: 1px solid;">
-                            <td>'.$row->user->name.'</td>
-                            <td>'.$row->tavar->name.'</td>
-                            <td>'.$row->raqam.'</td>
-                            <td>'.$row->soni.'</td>
-                            <td>'.$row->summa2.'</td>
-                            <td>'.$row->chegirma.'</td>
-                            <td>'.$row->itog.'</td>
-                            <td>'.$row->updated_at.'</td>
+                            <td class="ui-widget-content">'.$row->user->name.'</td>
+                            <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                            <td class="ui-widget-content">'.$row->raqam.'</td>
+                            <td class="ui-widget-content">'.$row->soni.'</td>
+                            <td class="ui-widget-content">'.$row->summa2.'</td>
+                            <td class="ui-widget-content">'.$row->chegirma.'</td>
+                            <td class="ui-widget-content">'.$row->itog.'</td>
+                            <td class="ui-widget-content">'.$row->updated_at.'</td>
                         </tr>
                         ';
                     }
@@ -1009,13 +1009,13 @@ class KlentController2 extends Controller
                     {
                         $output2 .= '
                         <tr style="border-bottom: 1px solid;">
-                            <td>'.$row->user->name.'</td>
-                            <td>'.$row->itogs.'</td>
-                            <td>'.$row->naqt.'</td>
-                            <td>'.$row->plastik.'</td>
-                            <td>'.$row->bank.'</td>
-                            <td>'.$row->karzs.'</td>
-                            <td>'.$row->updated_at.'</td>
+                            <td class="ui-widget-content">'.$row->user->name.'</td>
+                            <td class="ui-widget-content">'.$row->itogs.'</td>
+                            <td class="ui-widget-content">'.$row->naqt.'</td>
+                            <td class="ui-widget-content">'.$row->plastik.'</td>
+                            <td class="ui-widget-content">'.$row->bank.'</td>
+                            <td class="ui-widget-content">'.$row->karzs.'</td>
+                            <td class="ui-widget-content">'.$row->updated_at.'</td>
                         </tr>
                         ';
                     }
@@ -1105,13 +1105,13 @@ class KlentController2 extends Controller
                 {
                     $output .= '
                     <tr style="border-bottom: 1px solid;">
-                        <td>'.$row->tavar->name.'</td>
-                        <td>'.$row->raqam.'</td>
-                        <td>'.$row->soni.'</td>
-                        <td>'.$row->summa2.'</td>
-                        <td>'.$row->chegirma.'</td>
-                        <td>'.$row->itog.'</td>
-                        <td>'.$row->updated_at.'</td>
+                        <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                        <td class="ui-widget-content">'.$row->raqam.'</td>
+                        <td class="ui-widget-content">'.$row->soni.'</td>
+                        <td class="ui-widget-content">'.$row->summa2.'</td>
+                        <td class="ui-widget-content">'.$row->chegirma.'</td>
+                        <td class="ui-widget-content">'.$row->itog.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
                     </tr>
                     ';
                 }
@@ -1185,13 +1185,13 @@ class KlentController2 extends Controller
                 {
                     $output .= '
                     <tr style="border-bottom: 1px solid;">
-                        <td>'.$row->tavar->name.'</td>
-                        <td>'.$row->raqam.'</td>
-                        <td>'.$row->soni.'</td>
-                        <td>'.$row->summa2.'</td>
-                        <td>'.$row->chegirma.'</td>
-                        <td>'.$row->itog.'</td>
-                        <td>'.$row->updated_at.'</td>
+                        <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                        <td class="ui-widget-content">'.$row->raqam.'</td>
+                        <td class="ui-widget-content">'.$row->soni.'</td>
+                        <td class="ui-widget-content">'.$row->summa2.'</td>
+                        <td class="ui-widget-content">'.$row->chegirma.'</td>
+                        <td class="ui-widget-content">'.$row->itog.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
                     </tr>
                     ';
                 }
@@ -1265,13 +1265,13 @@ class KlentController2 extends Controller
                 {
                     $output .= '
                     <tr style="border-bottom: 1px solid;">
-                        <td>'.$row->tavar->name.'</td>
-                        <td>'.$row->raqam.'</td>
-                        <td>'.$row->soni.'</td>
-                        <td>'.$row->summa2.'</td>
-                        <td>'.$row->chegirma.'</td>
-                        <td>'.$row->itog.'</td>
-                        <td>'.$row->updated_at.'</td>
+                        <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                        <td class="ui-widget-content">'.$row->raqam.'</td>
+                        <td class="ui-widget-content">'.$row->soni.'</td>
+                        <td class="ui-widget-content">'.$row->summa2.'</td>
+                        <td class="ui-widget-content">'.$row->chegirma.'</td>
+                        <td class="ui-widget-content">'.$row->itog.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
                     </tr>
                     ';
                 }
@@ -1345,14 +1345,14 @@ class KlentController2 extends Controller
             {
                 $output .= '
                 <tr style="border-bottom: 1px solid;">
-                    <td>'.$row->tavar->name.'</td>
-                    <td>'.$row->adress.'</td>
-                    <td>'.$row->name.'</td>
-                    <td>'.$row->hajm.'</td>
-                    <td>'.$row->summa.'</td>
-                    <td>'.$row->summa2.'</td>
-                    <td>'.$row->summa3.'</td>
-                    <td>'.$row->updated_at.'</td>
+                    <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                    <td class="ui-widget-content">'.$row->adress.'</td>
+                    <td class="ui-widget-content">'.$row->name.'</td>
+                    <td class="ui-widget-content">'.$row->hajm.'</td>
+                    <td class="ui-widget-content">'.$row->summa.'</td>
+                    <td class="ui-widget-content">'.$row->summa2.'</td>
+                    <td class="ui-widget-content">'.$row->summa3.'</td>
+                    <td class="ui-widget-content">'.$row->updated_at.'</td>
                 </tr>
                 ';
             }
@@ -1429,14 +1429,14 @@ class KlentController2 extends Controller
             {
                 $output .= '
                 <tr style="border-bottom: 1px solid;">
-                    <td>'.$row->tavar->name.'</td>
-                    <td>'.$row->adress.'</td>
-                    <td>'.$row->name.'</td>
-                    <td>'.$row->hajm.'</td>
-                    <td>'.$row->summa.'</td>
-                    <td>'.$row->summa2.'</td>
-                    <td>'.$row->summa3.'</td>
-                    <td>'.$row->updated_at.'</td>
+                    <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                    <td class="ui-widget-content">'.$row->adress.'</td>
+                    <td class="ui-widget-content">'.$row->name.'</td>
+                    <td class="ui-widget-content">'.$row->hajm.'</td>
+                    <td class="ui-widget-content">'.$row->summa.'</td>
+                    <td class="ui-widget-content">'.$row->summa2.'</td>
+                    <td class="ui-widget-content">'.$row->summa3.'</td>
+                    <td class="ui-widget-content">'.$row->updated_at.'</td>
                 </tr>
                 ';
             }
@@ -1511,14 +1511,14 @@ class KlentController2 extends Controller
             {
                 $output .= '
                 <tr style="border-bottom: 1px solid;">
-                    <td>'.$row->tavar->name.'</td>
-                    <td>'.$row->adress.'</td>
-                    <td>'.$row->name.'</td>
-                    <td>'.$row->hajm.'</td>
-                    <td>'.$row->summa.'</td>
-                    <td>'.$row->summa2.'</td>
-                    <td>'.$row->summa3.'</td>
-                    <td>'.$row->updated_at.'</td>
+                    <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                    <td class="ui-widget-content">'.$row->adress.'</td>
+                    <td class="ui-widget-content">'.$row->name.'</td>
+                    <td class="ui-widget-content">'.$row->hajm.'</td>
+                    <td class="ui-widget-content">'.$row->summa.'</td>
+                    <td class="ui-widget-content">'.$row->summa2.'</td>
+                    <td class="ui-widget-content">'.$row->summa3.'</td>
+                    <td class="ui-widget-content">'.$row->updated_at.'</td>
                 </tr>
                 ';
             }

@@ -143,7 +143,7 @@
                           <div class="table-responsive">
                             <div class="extr22 scrolll2">
                               <div class="rty2">
-                                <table class="tab" id="">
+                                <table class="tab table-hover" id="">
                                     <thead>
                                       <th>
                                         <button id="vse" class="btn btn-success">
@@ -293,7 +293,6 @@
             </div>
     </div>
 </div>
-
   <div id="tavar2">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Товарни кошиш</h5>
@@ -452,9 +451,13 @@
 
 <script>
 
-    // $(function(){
-    //  $( "#AAAAAAAA" ).draggable();
-    // });
+// $( function() {
+//   $( "#tavar_tip" ).selectable();
+// } );
+
+$( function() {
+  $( "#tavarlar" ).selectable();
+} );
 
     $.ajaxSetup({
       headers: {
@@ -560,7 +563,7 @@
                 $("#foiz").val(foo);
                 $("#dateitog").val(data.foo2.dateitog);
               }
-          })
+          });
         });
 
         $(document).on('change', "#date", function(e) {

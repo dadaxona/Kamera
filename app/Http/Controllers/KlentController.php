@@ -51,8 +51,8 @@ class KlentController extends KlentController2
             {
                 $output .= '
                 <tr style="border-bottom: 1px solid;">
-                    <td>'.$row->name.'</td>
-                    <td>
+                    <td class="ui-widget-content">'.$row->name.'</td>
+                    <td class="ui-widget-content">
                         <a href="javascript:void(0)" onclick="editPost2('.$row->id.')" style="color: green">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
                                 <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
@@ -105,9 +105,9 @@ class KlentController extends KlentController2
             {
                 $output .= '
                 <tr style="border-bottom: 1px solid;">
-                    <td>'.$row->tavar->name.'</td>
-                    <td>'.$row->name.'</td>
-                    <td>
+                    <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                    <td class="ui-widget-content">'.$row->name.'</td>
+                    <td class="ui-widget-content">
                         <a href="javascript:void(0)" onclick="editPost2('.$row->id.')" style="color: green">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
                                 <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
@@ -166,8 +166,8 @@ class KlentController extends KlentController2
             {
                 $output .= '
                 <tr id="row_'.$row->id.'" style="border-bottom: 1px solid;">
-                <td>'. $row->adress.'</td>
-                <td>
+                <td class="ui-widget-content">'. $row->adress.'</td>
+                <td class="ui-widget-content">
                   <a href="javascript:void(0)" onclick="editPosts2('.$row->id .')" style="color: green">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
                       <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
@@ -227,12 +227,12 @@ class KlentController extends KlentController2
             {
                 $output .= '
                 <tr id="row_'.$row->id.'" style="border-bottom: 1px solid;">
-                <td>'.$row->name.'</td>
-                <td>'.$row->tel.'</td>
-                <td>'.$row->firma.'</td>
-                <td>'.$row->inn.'</td>
+                <td class="ui-widget-content">'.$row->name.'</td>
+                <td class="ui-widget-content">'.$row->tel.'</td>
+                <td class="ui-widget-content">'.$row->firma.'</td>
+                <td class="ui-widget-content">'.$row->inn.'</td>
             
-                <td>
+                <td class="ui-widget-content">
                   <a href="javascript:void(0)" onclick="editPost('.$row->id.')" style="color: green">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
                       <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
@@ -288,9 +288,9 @@ class KlentController extends KlentController2
             {
                 $output .= '
                 <tr id="row_'.$row->id.'" style="border-bottom: 1px solid;">
-                <td>'.$row->login.'</td>
-                <td>'.$row->password.'</td>            
-                <td>
+                <td class="ui-widget-content">'.$row->login.'</td>
+                <td class="ui-widget-content">'.$row->password.'</td>            
+                <td class="ui-widget-content">
                   <a href="javascript:void(0)" onclick="editPost('.$row->id.')" style="color: green">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
                       <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
@@ -346,10 +346,10 @@ class KlentController extends KlentController2
             {
                 $output .= '
                 <tr id="row_'.$row->id.'" style="border-bottom: 1px solid;">
-                <td>'.$row->name.'</td>
-                <td>'.$row->login.'</td>
-                <td>'.$row->password.'</td>            
-                <td>
+                <td class="ui-widget-content">'.$row->name.'</td>
+                <td class="ui-widget-content">'.$row->login.'</td>
+                <td class="ui-widget-content">'.$row->password.'</td>            
+                <td class="ui-widget-content">
                   <a href="javascript:void(0)" onclick="editPost('.$row->id.')" style="color: green">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
                       <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
@@ -746,12 +746,12 @@ class KlentController extends KlentController2
           {
            $output .= '
            <tr onclick="belgilash('.$row->id.')" style="border-bottom: 1px solid;">  
-            <td>'.$row->name.'</td>
-            <td>'.number_format($row->summa2, 3).'</td>
-            <td>'.$row->soni.'</td>
-            <td>'.$row->chegirma.'</td>
-            <td>'.number_format($row->itog, 3).'</td>
-            <td>'.$row->hajm.'</td>
+            <td class="ui-widget-content">'.$row->name.'</td>
+            <td class="ui-widget-content">'.number_format($row->summa2, 3).'</td>
+            <td class="ui-widget-content">'.$row->soni.'</td>
+            <td class="ui-widget-content">'.$row->chegirma.'</td>
+            <td class="ui-widget-content">'.number_format($row->itog, 3).'</td>
+            <td class="ui-widget-content">'.$row->hajm.'</td>
            </tr>
            ';
           }
@@ -784,9 +784,9 @@ class KlentController extends KlentController2
             foreach($data as $row)
             {
                 $output .= '
-                <tr ondblclick="plus('.$row->id.')" style="border-bottom: 1px solid;" id="asdsad">
-                <td>'.$row->name.'</td>
-                <td>'.$row->hajm.'</td>
+                <tr ondblclick="plus('.$row->id.')" style="border-bottom: 1px solid;">
+                <td class="ui-widget-content">'.$row->name.'</td>
+                <td class="ui-widget-content">'.$row->hajm.'</td>
                 </tr>
                 ';
             }
@@ -829,12 +829,12 @@ class KlentController extends KlentController2
             {
                 $output .= '
                 <tr data-id="'.$row->id.'" id="data" style="border-bottom: 1px solid;">
-                <td>'.$row->tavar->name.'</td>
-                <td>'.$row->name.'</td>
-                <td>'.$row->hajm.'</td>
-                <td>'.$row->summa.'</td>
-                <td>'.$row->summa2.'</td>
-                <td>'.$row->summa3.'</td>
+                <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                <td class="ui-widget-content">'.$row->name.'</td>
+                <td class="ui-widget-content">'.$row->hajm.'</td>
+                <td class="ui-widget-content">'.$row->summa.'</td>
+                <td class="ui-widget-content">'.$row->summa2.'</td>
+                <td class="ui-widget-content">'.$row->summa3.'</td>
                 </tr>
                 ';
             }
@@ -876,12 +876,12 @@ class KlentController extends KlentController2
             {
                 $output .= '
                 <tr data-id="'.$row->id.'" id="asdsad" style="border-bottom: 1px solid;">
-                <td>'.$row->tavar->name.'</td>
-                <td>'.$row->name.'</td>
-                <td>'.$row->hajm.'</td>
-                <td>'.$row->summa.'</td>
-                <td>'.$row->summa2.'</td>
-                <td>'.$row->summa3.'</td>
+                <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                <td class="ui-widget-content">'.$row->name.'</td>
+                <td class="ui-widget-content">'.$row->hajm.'</td>
+                <td class="ui-widget-content">'.$row->summa.'</td>
+                <td class="ui-widget-content">'.$row->summa2.'</td>
+                <td class="ui-widget-content">'.$row->summa3.'</td>
                 </tr>
                 ';
             }
@@ -916,12 +916,12 @@ class KlentController extends KlentController2
             {
                 $output .= '
                 <tr data-id="'.$row->id.'" id="asdsad" style="border-bottom: 1px solid;">
-                <td>'.$row->tavar->name.'</td>
-                <td>'.$row->name.'</td>
-                <td>'.$row->hajm.'</td>
-                <td>'.$row->summa.'</td>
-                <td>'.$row->summa2.'</td>
-                <td>'.$row->summa3.'</td>
+                <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                <td class="ui-widget-content">'.$row->name.'</td>
+                <td class="ui-widget-content">'.$row->hajm.'</td>
+                <td class="ui-widget-content">'.$row->summa.'</td>
+                <td class="ui-widget-content">'.$row->summa2.'</td>
+                <td class="ui-widget-content">'.$row->summa3.'</td>
                 </tr>
                 ';
             }
@@ -948,12 +948,12 @@ class KlentController extends KlentController2
                 {
                     $output .= '
                     <tr data-id="'.$row->id.'" id="asdsad" style="border-bottom: 1px solid;">
-                    <td>'.$row->tavar->name.'</td>
-                    <td>'.$row->name.'</td>
-                    <td>'.$row->hajm.'</td>
-                    <td>'.$row->summa.'</td>
-                    <td>'.$row->summa2.'</td>
-                    <td>'.$row->summa3.'</td>
+                    <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                    <td class="ui-widget-content">'.$row->name.'</td>
+                    <td class="ui-widget-content">'.$row->hajm.'</td>
+                    <td class="ui-widget-content">'.$row->summa.'</td>
+                    <td class="ui-widget-content">'.$row->summa2.'</td>
+                    <td class="ui-widget-content">'.$row->summa3.'</td>
                     </tr>
                     ';
                 }

@@ -224,6 +224,23 @@
 </div>
 
 <script>
+
+$( function() {
+    $( "#savdobirlamchi" ).selectable();
+  } );
+
+  $( function() {
+    $( "#dolg" ).selectable();
+  } );
+  $( function() {
+    $( "#savdo" ).selectable();
+  } );
+
+  // $( function() {
+  //   $( "#clent_tip" ).selectable();
+  // } );
+
+
     $.ajaxSetup({
       headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

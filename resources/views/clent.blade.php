@@ -82,6 +82,10 @@
         </div>
       </div>
 <script>
+    $( function() {
+    $( "#clent" ).selectable();
+  } );
+
     $.ajaxSetup({
       headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

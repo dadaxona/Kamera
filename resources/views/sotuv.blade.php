@@ -388,9 +388,9 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Заказ болими</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           <div class="text-center pb-4 pt-4">
               <button type="button" class="btn btn-primary mx-4" id="zzzz">Бирламчи</button>
               <button type="submit" id="zzzz2" class="btn btn-success">Дойимий</button>
@@ -400,6 +400,21 @@
   </div>
 
 <script type="text/javascript">
+  $( function() {
+    $( "#tbody2" ).selectable();
+  } );
+  
+  $( function() {
+    $( "#zaqazz123" ).selectable();
+  } );
+
+//   $( function() {
+//     $( "#imya" ).selectable();
+//   } );
+
+  $( function() {
+    $( "#tbody" ).selectable();
+  } );
 function kursm(){
         let _token = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
