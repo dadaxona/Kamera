@@ -182,6 +182,7 @@
                                 <tr>
                                 <th>Номи</th>
                                 <th>Шт</th>
+                                <th>Розничная цена</th>
                                 </tr>
                             </thead>
                             <tbody id="tbody2">

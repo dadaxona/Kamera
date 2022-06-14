@@ -14,12 +14,15 @@ use App\Models\Updatetavr;
 use App\Models\User;
 use App\Providers\KlentServis2;
 use App\Models\Itogo;
+use App\Models\Jonatilgan2;
 use App\Models\Karzina;
 use App\Models\Karzina2;
 use App\Models\Karzina3;
 use App\Models\Tavar2;
 use App\Models\Tavar2p;
 use App\Models\Tavarp;
+use App\Models\Trvarck;
+use App\Models\Trvark;
 use App\Models\Zakaz;
 use App\Models\Zakaz2;
 use Illuminate\Support\Facades\Session;
@@ -154,7 +157,9 @@ class KlentServis extends KlentServis2
         $umumiy = Umumiy::find(1);
         if(Session::has('IDIE')){
           $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
+           $jonatilgan = Jonatilgan2::count();
           return view('tavar2',[
+            'jonatilgan'=>$jonatilgan,
               'brends'=>$brends,
               'ichkitavar'=>$ichkitavar,
               'data'=>$data,
@@ -206,6 +211,17 @@ class KlentServis extends KlentServis2
                         'summa2'=>$value["summa2"],
                         'summa3'=>$value["summa3"],
                     ]);
+                Trvark::create([
+                        'tavar_id'=>$value["tavar_id"],
+                        'adress'=>$value["adress"],
+                        'tavar2_id'=>$value["tavar2_id"],
+                        'ichkitavar_id'=>$data->id,
+                        'raqam'=>$value["raqam"],
+                        'hajm'=>$value["hajm"],
+                        'summa'=>$value["summa"],
+                        'summa2'=>$value["summa2"],
+                        'summa3'=>$value["summa3"],
+                    ]);
             }else{
                 $fff = Tavar2::find($value["tavar2_id"]);
                 $data = Ichkitavar::create([
@@ -224,6 +240,17 @@ class KlentServis extends KlentServis2
                     'ichkitavar_id'=>$data->id,
                     'adress'=>$value["adress"],
                     'tavar2_id'=>$value["tavar2_id"],
+                    'raqam'=>$value["raqam"],
+                    'hajm'=>$value["hajm"],
+                    'summa'=>$value["summa"],
+                    'summa2'=>$value["summa2"],
+                    'summa3'=>$value["summa3"],
+                ]);
+                Trvark::create([
+                    'tavar_id'=>$value["tavar_id"],
+                    'adress'=>$value["adress"],
+                    'tavar2_id'=>$value["tavar2_id"],
+                    'ichkitavar_id'=>$data->id,
                     'raqam'=>$value["raqam"],
                     'hajm'=>$value["hajm"],
                     'summa'=>$value["summa"],
@@ -259,6 +286,17 @@ class KlentServis extends KlentServis2
             'ichkitavar_id'=>$request->id, 
             'adress'=>$request->adress,
             'tavar2_id'=>$request->tavar2_id,
+            'raqam'=>$request->raqam,
+            'hajm'=>$request->hajm, 
+            'summa'=>$request->summa,
+            'summa2'=>$request->summa2,
+            'summa3'=>$request->summa3,
+        ]);
+        Trvark::where('ichkitavar_id', $request->id)->update([
+            'tavar_id'=>$request->tavar_id,
+            'adress'=>$request->adress,
+            'tavar2_id'=>$request->tavar2_id,
+            'ichkitavar_id'=>$request->id, 
             'raqam'=>$request->raqam,
             'hajm'=>$request->hajm, 
             'summa'=>$request->summa,
@@ -371,7 +409,9 @@ class KlentServis extends KlentServis2
         $user = User::paginate(10);
         if(Session::has('IDIE')){
             $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
+             $jonatilgan = Jonatilgan2::count();
             return view('clent',[
+                'jonatilgan'=>$jonatilgan,
                 'brends'=>$brends,
                 'collection'=>$user,
             ]);
@@ -845,6 +885,17 @@ class KlentServis extends KlentServis2
                     Ichkitavar::find($value->ichkitavar_id)->update([
                         'hajm'=>$foo2
                     ]);
+                    Trvarck::create([
+                        'tavar_id'=>$foo->tavar_id,
+                        'adress'=>$foo->adress,
+                        'tavar2_id'=>$foo->tavar2_id,
+                        'ichkitavar_id'=>$foo->id, 
+                        'raqam'=>$foo->raqam,
+                        'hajm'=>$value->soni, 
+                        'summa'=>$value->summa,
+                        'summa2'=>$value->summa2,
+                        'summa3'=>$value->itog,
+                    ]);
                 }
                 Itogo::find(1)->update([
                     'itogo'=>0,
@@ -870,6 +921,17 @@ class KlentServis extends KlentServis2
                     $foo2 = $foo->hajm - $value->soni;
                     Ichkitavar::find($value->ichkitavar_id)->update([
                         'hajm'=>$foo2
+                    ]);
+                    Trvarck::create([
+                        'tavar_id'=>$foo->tavar_id,
+                        'adress'=>$foo->adress,
+                        'tavar2_id'=>$foo->tavar2_id,
+                        'ichkitavar_id'=>$foo->id, 
+                        'raqam'=>$foo->raqam,
+                        'hajm'=>$value->soni, 
+                        'summa'=>$value->summa,
+                        'summa2'=>$value->summa2,
+                        'summa3'=>$value->itog,
                     ]);
                 }
                 Itogo::find(1)->update([
@@ -909,6 +971,17 @@ class KlentServis extends KlentServis2
                     Ichkitavar::find($value->ichkitavar_id)->update([
                         'hajm'=>$foo2
                     ]);
+                    Trvarck::create([
+                        'tavar_id'=>$foo->tavar_id,
+                        'adress'=>$foo->adress,
+                        'tavar2_id'=>$foo->tavar2_id,
+                        'ichkitavar_id'=>$foo->id, 
+                        'raqam'=>$foo->raqam,
+                        'hajm'=>$value->soni, 
+                        'summa'=>$value->summa / $usd->kurs,
+                        'summa2'=>$value->summa2 / $usd->kurs,
+                        'summa3'=>$value->itog / $usd->kurs,
+                    ]);
                 }
                 Itogo::find(1)->update([
                     'itogo'=>0,
@@ -934,6 +1007,17 @@ class KlentServis extends KlentServis2
                     $foo2 = $foo->hajm - $value->soni;
                     Ichkitavar::find($value->ichkitavar_id)->update([
                         'hajm'=>$foo2
+                    ]);
+                    Trvarck::create([
+                        'tavar_id'=>$foo->tavar_id,
+                        'adress'=>$foo->adress,
+                        'tavar2_id'=>$foo->tavar2_id,
+                        'ichkitavar_id'=>$foo->id, 
+                        'raqam'=>$foo->raqam,
+                        'hajm'=>$value->soni, 
+                        'summa'=>$value->summa / $usd->kurs,
+                        'summa2'=>$value->summa2 / $usd->kurs,
+                        'summa3'=>$value->itog / $usd->kurs,
                     ]);
                 }
                 Itogo::find(1)->update([

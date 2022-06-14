@@ -36,6 +36,40 @@
     border-radius: 3px solid black; 
     color: white;
   }
+
+  .borders{
+   border-top: 2px solid;
+ }
+ .bor{
+   border-right: 2px solid;
+   padding: 0;
+ }
+ .bor1{
+   border-right: 2px solid;
+   padding-right: 0;
+ }
+ .bor2{
+   border-bottom: 2px solid;
+ }
+ #itog2{
+       /* background: #ffffff;
+       border: none;
+       border-bottom: 2px solid; */
+   }
+ .sifra{
+   border: none;
+   border-bottom: 2px solid;
+   font-size: 20px;
+   text-align: right;
+   padding-bottom: 0px;
+ }
+ .sifra2{
+   border: none;
+   border-bottom: 2px solid;
+   font-size: 20px;
+   text-align: center;
+   margin-top: 26px;
+ }
 </style>
 <div id="AAAAAAAA" class="card ui-widget-content">
     <div class="card-block tab-icon">
@@ -50,11 +84,11 @@
                         <div class="slide"></div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#messages7" role="tab" aria-expanded="false"><i class="icofont icofont-ui-message"></i>Итого</a>
+                        <a class="nav-link" data-toggle="tab" href="#messages7" role="tab" aria-expanded="false"><i class="icofont icofont-ui-message"></i>Удалить товар</a>
                         <div class="slide"></div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#settings7" role="tab" aria-expanded="false"><i class="icofont icofont-ui-settings"></i>Данные</a>
+                        <a class="nav-link" data-toggle="tab" href="#settings7" role="tab" aria-expanded="false"><i class="icofont icofont-ui-settings"></i>Оччет по товарам</a>
                         <div class="slide"></div>
                     </li>
                 </ul>
@@ -266,28 +300,117 @@
                     </div>
                     <div class="tab-pane" id="settings7" role="tabpanel" aria-expanded="false">
                       <div class="card-header-left">
-                        <div class="row">
-                          <div class="col-3 mt-0">
-                            <div class="card-tools">
-                              <form action="" method="GET">
-                                @csrf
-                                <div class="input-group input-group-sm">
-                                  <input class="form-control" type="date" name="date">
-                                  <input class="form-control" type="date" name="date2">
-                                    <div class="input-group-append">
-                                    <button type="submit" class="btn btn-primary buts">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                      </svg>
-                                    </button>
-                                  </div>            
+                        </div>
+                        <div class="tab-pane active" id="home7" role="tabpanel" aria-expanded="true">
+                          <div class="row">
+                            <div class="col-2 bor">
+                              <div class="table-responsive">
+                                <div class="ext scrolll2">
+                                  <div class="rty2">
+                                    <table class="tab table-hover" id="">
+              
+                                        <thead>
+                                          <th>
+                                            <button id="vsetav" class="btn btn-success">
+                                              Все
+                                            </button>
+                                          </th>
+                                        </thead>
+                                        <tbody id="tav">
+                        
+                                        </tbody>
+                                    </table>
+                                  </div>
                                 </div>
-                              </form>
+                              </div>
+                            </div>
+                            <div class="col-6 bor">
+                              <div class="table-responsive">
+                                <div class="ext scrolll2">
+                                  <div class="rty2">
+                                    <table class="tab table-hover">
+              
+                                      <thead>
+                                        <tr>
+                                          <th>Тип</th>
+                                          <th>Товар</th>
+                                          <th>Шт</th>
+                                          <th>Закупочная цена</th>
+                                          <th>Оптовая цена</th>
+                                          <th>Розничная цена</th>
+                                          <th>Последняя дата</th>
+                                        </tr>             
+                                    </thead>
+                                        <tbody id="ol">
+                        
+                                        </tbody>
+                                    </table>
+                                  </div> 
+                                </div>
+                              </div> 
+                            </div>
+                            <div class="col-4">
+                              <div class="table-responsive">
+                                <div class="ext scrolll2">
+                                  <div class="rty2">
+                                    <table class="tab table-hover">
+              
+                                      <thead>
+                                        <tr>
+                                          <th>Товар</th>
+                                          <th>Шт</th>
+                                          <th>Розничная цена</th>
+                                          <th>Итого</th>
+                                          <th>Последняя дата</th>
+                                        </tr>             
+                                    </thead>
+                                        <tbody id="sot">
+                        
+                                        </tbody>
+                                    </table>
+                                  </div> 
+                                </div>
+                              </div> 
+                            </div>
+                            <div class="col-12 m-0 p-0 borders">
+                              <div class="row">
+                                <div class="col-2 bor1">
+                                  <input type="text" id="tavarshtuk2" class="form-control sifra" placeholder="Товар шт">
+                                  <input type="text" id="shtuk2" class="form-control sifra" placeholder="Шт">  
+                                </div>
+                                <div class="col-2 bor1">
+                                  <input type="text" id="foiz2" class="form-control sifra" placeholder="Закупочная цена">
+                                  <input type="text" id="itoge2" class="form-control sifra" placeholder="Продажни итог">  
+                                </div>
+                                <div class="col-3 mx-5 bor1">
+                                  <input type="text" id="clentname" class="form-control sifra2" placeholder="Товар имя">  
+                                </div>
+                                <div class="col-4 mt-4">
+                                  <form>
+                                    @csrf
+                                  <input type="hidden" id="oydi">
+                        
+                                    <div class="d-flex">
+                                      <select name="tavars_id" id="tavars_id" class="form-control bor2">
+                                        <option value="">--Тип--</option>
+                                        @foreach ($ichkitavar as $item)
+                                          <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                      </select>
+                                      <input class="form-control mx-2" style="width: 37%" type="date" id="datess" name="datess">
+                                      <input class="form-control" style="width: 37%" type="date" id="datesss2" name="datesss2">
+                                        {{-- <div class="input-group-append">
+                                        <button type="submit" class="btn btn-primary buts" id="submithendel">
+                                            Поиск
+                                        </button>
+                                      </div> --}}
+                                    </div>
+                                  </form>
+                              </div>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        </div>
-                        <p class="m-0 text-center">Пусто</p>
+                      </div>
                     </div>
                 </div>
             </div>
@@ -489,6 +612,158 @@ $( function() {
     });
 
     $(document).ready(function(){
+
+      fetch_tavar();
+    function fetch_tavar(query = '')
+    {
+        $.ajax({
+            url:"{{ route('tav') }}",
+            method:'GET',
+            data:{query:query},
+            dataType:'json',
+            success:function(data)
+            {
+                $('#tav').html(data.table_data);
+            }
+        })
+    }
+
+    $(document).on('click', "#vsetav", function(){
+        let _token  = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+              url:"{{ route('tavarvseme') }}",
+              method:'GET',
+              data:{
+                _token: _token
+              },
+              dataType:'json',
+              success:function(data)
+              {
+                $('#ol').html(data.output);
+                $('#sot').html(data.output2);
+                $("#clentname").val(data.clent);
+                $("#tavarshtuk2").val(data.foo2.tavarshtuk);
+                $("#shtuk2").val(data.foo2.shtuk);
+                $("#foiz2").val(data.foo2.foiz);
+                $("#itoge2").val(data.foo2.opshi);
+              }
+          })
+        });
+
+      $(document).on('click', "#tav1", function(){
+      var id = $(this).data("id");
+      $.ajax({
+            url:"{{ route('tavarxisob') }}",
+            method:'GET',
+            data:{
+              id: id
+            },
+            dataType:'json',
+            success:function(data)
+            {
+              $('#ol').html(data.output);
+              $('#sot').html(data.output2);
+              $("#clentname").val(data.clent.name);
+              $("#tavarshtuk2").val(data.foo2.tavarshtuk);
+              $("#shtuk2").val(data.foo2.shtuk);
+              $("#foiz2").val(data.foo2.foiz);
+              $("#itoge2").val(data.foo2.opshi);
+            }
+        });
+      });
+
+      $(document).on('change', "#tavars_id", function(){
+      var tavars_id = $("#tavars_id").val();
+      var date = $("#datess").val();
+      var date2 = $("#datesss2").val();
+        let _token  = $('meta[name="csrf-token"]').attr('content');
+          $.ajax({
+                url:"{{ route('tavars333') }}",
+                method:'POST',
+                data:{
+                  id: tavars_id,
+                  date: date,
+                  date2: date2,
+                  _token: _token
+                },
+                dataType:'json',
+                success:function(data)
+                {
+                  $('#ol').html(data.output);
+                  $('#sot').html(data.output2);
+                  $("#clentname").val("Not");
+                  $("#tavarshtuk2").val(data.foo2.tavarshtuk);
+                  $("#shtuk2").val(data.foo2.shtuk);
+                  $("#foiz2").val(data.foo2.foiz);
+                  $("#itoge2").val(data.foo2.opshi);
+                }
+            });
+        });
+
+      $(document).on('change', "#datess", function(){
+        var tavars_id = $("#tavars_id").val();
+        var date = $("#datess").val();
+      var date2 = $("#datesss2").val();
+      let _token  = $('meta[name="csrf-token"]').attr('content');
+      // if(oydi){
+        $.ajax({
+              url:"{{ route('tavars333') }}",
+              method:'POST',
+              data:{
+                id: tavars_id,
+                date: date,
+                date2: date2,
+                _token: _token
+              },
+              dataType:'json',
+              success:function(data)
+              {
+                $('#ol').html(data.output);
+                $('#sot').html(data.output2);
+                $("#clentname").val("Not");
+                $("#tavarshtuk2").val(data.foo2.tavarshtuk);
+                $("#shtuk2").val(data.foo2.shtuk);
+                $("#foiz2").val(data.foo2.foiz);
+                $("#itoge2").val(data.foo2.opshi);
+              }
+          });
+      // }else{
+      //   toastr.error("Выберите клент").fadeOut(1500);
+      // }
+    });
+
+    $(document).on('change', "#datesss2", function(){
+      var tavars_id = $("#tavars_id").val();
+    var date = $("#datess").val();
+    var date2 = $("#datesss2").val();
+    let _token  = $('meta[name="csrf-token"]').attr('content');
+      // if(oydi){
+        $.ajax({
+              url:"{{ route('tavars333') }}",
+              method:'POST',
+              data:{
+                id: tavars_id,
+                date: date,
+                date2: date2,
+                _token: _token
+              },
+              dataType:'json',
+              success:function(data)
+              {
+                $('#ol').html(data.output);
+                $('#sot').html(data.output2);
+                $("#clentname").val("Not");
+                $("#tavarshtuk2").val(data.foo2.tavarshtuk);
+                $("#shtuk2").val(data.foo2.shtuk);
+                $("#foiz2").val(data.foo2.foiz);
+                $("#itoge2").val(data.foo2.opshi);
+              }
+          });
+      // }else{
+      //   toastr.error("Выберите клент").fadeOut(1500);
+      // }
+    });
+
       let _token   = $('meta[name="csrf-token"]').attr('content');
       fetch_customer_data();
       function fetch_customer_data(query = '')

@@ -16,12 +16,16 @@ use App\Models\Data;
 use App\Models\Drektor;
 use App\Models\Ichkitavar;
 use App\Models\Itogo;
+use App\Models\Jonatilgan;
+use App\Models\Jonatilgan2;
 use App\Models\Karzina;
 use App\Models\Karzina2;
 use App\Models\Karzina3;
 use App\Models\Sqladpoytaxt;
 use App\Models\Tavar2;
 use App\Models\Tayyorsqlad;
+use App\Models\Trvarck;
+use App\Models\Trvark;
 use App\Models\Umumiy;
 use App\Models\Updatetavr;
 use App\Models\Zakaz;
@@ -330,6 +334,47 @@ class KlentController2 extends Controller
         }
     }
 
+    public function tav(Request $request)
+    {
+        if($request->ajax())
+        {
+        $output = '';
+        $query = $request->get('query');
+        if($query != '')
+        {
+        $data = Ichkitavar::where('name', 'like', '%'.$query.'%')->get();
+        }
+        else
+        {
+        $data = Ichkitavar::get();
+        }
+        $total_row = $data->count();
+        if($total_row > 0)
+        {
+            foreach($data as $row)
+            {
+                $output .= '
+                <tr data-id="'.$row->id.'" id="tav1" style="cursor: pointer;" style="border-bottom: 1px solid;">
+                    <td class="ui-widget-content">'.$row->name.'</td>
+                </tr>
+                ';
+            }
+        }
+        else
+        {
+        $output = '
+            <tr>
+                <td align="center" colspan="5">No Data Found</td>
+            </tr>
+            ';
+        }
+        $data = array(
+            'table_data'  => $output,
+        );
+        return response()->json($data);
+        }
+    }
+
     public function savdobirlamchi(Request $request)
     {
         if($request->ajax())
@@ -489,6 +534,225 @@ class KlentController2 extends Controller
         }
     }
 
+        
+    public function tavarvseme(Request $request)
+    {
+        if($request->ajax())
+        {
+            $output = '';
+            $output2 = '';
+            $data = Trvark::all();     
+            $data222 = Trvarck::all();     
+            $total_row = $data->count();
+            if($total_row > 0)
+            {
+                foreach($data as $row)
+                {
+                    $output .= '
+                    <tr style="border-bottom: 1px solid;">
+                        <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                        <td class="ui-widget-content">'.$row->tavar2->name.'</td>
+                        <td class="ui-widget-content">'.$row->hajm.'</td>
+                        <td class="ui-widget-content">'.$row->summa.'</td>
+                        <td class="ui-widget-content">'.$row->summa2.'</td>
+                        <td class="ui-widget-content">'.$row->summa3.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
+                    </tr>
+                    ';
+                }
+                foreach($data222 as $row)
+                {
+                    $output2 .= '
+                    <tr style="border-bottom: 1px solid;">
+                        <td class="ui-widget-content">'.$row->tavar2->name.'</td>
+                        <td class="ui-widget-content">'.$row->hajm.'</td>
+                        <td class="ui-widget-content">'.$row->summa2.'</td>
+                        <td class="ui-widget-content">'.$row->summa3.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
+                    </tr>
+                    ';
+                }
+            }
+            $foo = Clentitog::find(1);
+            if($foo){
+                $foo->tavarshtuk = 0;
+                $foo->shtuk = 0;
+                $foo->foiz = 0;
+                $foo->itog = 0;
+                $foo->opshi = 0;
+                $foo->save();
+                foreach ($data as $value) {
+                    $fool = Clentitog::find(1);
+                    $shtuk = $fool->shtuk + $value->hajm;
+                    Clentitog::find(1)->update([
+                        'tavarshtuk'=>$total_row,
+                        'shtuk'=>$shtuk,
+                    ]);
+                }
+                foreach ($data222 as $value) {
+                    $fool2 = Clentitog::find(1);
+                    $a = $fool2->opshi + $value->summa3;
+                    Clentitog::find(1)->update([
+                        'opshi'=>$a,
+                    ]);
+                }
+                foreach ($data as $value) {
+                    $fool2 = Clentitog::find(1);
+                    $a = $fool2->foiz + $value->summa;
+                    Clentitog::find(1)->update([
+                        'foiz'=>$a,
+                    ]);
+                }
+            }else{
+                Clentitog::create([
+                    'tavarshtuk'=>0,
+                    'shtuk'=>0,
+                    'foiz'=>0,
+                    'itog'=>0,
+                    'opshi'=>0
+                ]);
+                foreach ($data as $value) {
+                    $foo = Clentitog::find(1);        
+                    $shtuk2 = $foo->shtuk + $value->hajm;
+                    Clentitog::find(1)->update([
+                        'tavarshtuk'=>$total_row,
+                        'shtuk'=>$shtuk2,
+                    ]);
+                }
+                foreach ($data222 as $value) {
+                    $fool2 = Clentitog::find(1);
+                    $a = $fool2->opshi + $value->summa3;
+                    Clentitog::find(1)->update([
+                        'opshi'=>$a,
+                    ]);
+                }
+                foreach ($data as $value) {
+                    $fool3 = Clentitog::find(1);
+                    $a1 = $fool3->foiz + $value->itog;
+                    Clentitog::find(1)->update([
+                        'foiz'=>$a1,
+                    ]);
+                }
+            }
+            $foo2 = Clentitog::find(1);
+            return response()->json([
+                'output'=>$output,
+                'output2'=>$output2,
+                'clent'=>"Все Товар",
+                'foo2'=>$foo2??[],
+            ]);
+        }
+    }
+
+    public function tavarxisob(Request $request)
+    {
+        if($request->ajax())
+        {
+            $output = '';
+            $output2 = '';
+            $da = Ichkitavar::find($request->id);   
+            $data = Trvark::where('ichkitavar_id', $da->id)->get();     
+            $data222 = Trvarck::where('ichkitavar_id', $da->id)->get();     
+            $total_row = $data->count();
+            if($total_row > 0)
+            {
+                foreach($data as $row)
+                {
+                    $output .= '
+                    <tr style="border-bottom: 1px solid;">
+                        <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                        <td class="ui-widget-content">'.$row->tavar2->name.'</td>
+                        <td class="ui-widget-content">'.$row->hajm.'</td>
+                        <td class="ui-widget-content">'.$row->summa.'</td>
+                        <td class="ui-widget-content">'.$row->summa2.'</td>
+                        <td class="ui-widget-content">'.$row->summa3.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
+                    </tr>
+                    ';
+                }
+                foreach($data222 as $row)
+                {
+                    $output2 .= '
+                    <tr style="border-bottom: 1px solid;">
+                        <td class="ui-widget-content">'.$row->tavar2->name.'</td>
+                        <td class="ui-widget-content">'.$row->hajm.'</td>
+                        <td class="ui-widget-content">'.$row->summa2.'</td>
+                        <td class="ui-widget-content">'.$row->summa3.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
+                    </tr>
+                    ';
+                }
+            }
+            $foo = Clentitog::find(1);
+            if($foo){
+                $foo->tavarshtuk = 0;
+                $foo->shtuk = 0;
+                $foo->foiz = 0;
+                $foo->itog = 0;
+                $foo->opshi = 0;
+                $foo->save();
+                foreach ($data as $value) {            
+                    $fool = Clentitog::find(1);
+                    $shtuk = $fool->shtuk + $value->hajm;
+                    Clentitog::find(1)->update([
+                        'tavarshtuk'=>$total_row,
+                        'shtuk'=>$shtuk,
+                    ]);
+                }
+                foreach ($data222 as $value) {
+                    $fool2 = Clentitog::find(1);
+                    $a = $fool2->opshi + $value->summa3;
+                    Clentitog::find(1)->update([
+                        'opshi'=>$a,
+                    ]);
+                }
+                foreach ($data as $value) {
+                    $fool2 = Clentitog::find(1);
+                    $a = $fool2->foiz + $value->summa;
+                    Clentitog::find(1)->update([
+                        'foiz'=>$a,
+                    ]);
+                }
+            }else{
+                Clentitog::create([
+                    'tavarshtuk'=>0,
+                    'shtuk'=>0,
+                    'foiz'=>0,
+                    'itog'=>0,
+                    'opshi'=>0
+                ]);
+                foreach ($data as $value) {
+                    $foo = Clentitog::find(1);        
+                    $shtuk2 = $foo->shtuk + $value->hajm;
+                    Clentitog::find(1)->update([
+                        'tavarshtuk'=>$total_row,
+                        'shtuk'=>$shtuk2,
+                    ]);
+                }
+                foreach ($data222 as $value) {
+                    $fool2 = Clentitog::find(1);
+                    $a = $fool2->opshi + $value->summa3;
+                    Clentitog::find(1)->update([
+                        'opshi'=>$a,
+                    ]);
+                }
+                foreach ($data as $value) {
+                    $fool3 = Clentitog::find(1);
+                    $a1 = $fool3->foiz + $value->summa;
+                    Clentitog::find(1)->update([
+                        'foiz'=>$a1,
+                    ]);
+                }
+            }
+            $foo2 = Clentitog::find(1);
+            return response()->json([
+                'output'=>$output,
+                'output2'=>$output2,
+                'clent'=>$da,
+                'foo2'=>$foo2??[],
+            ]);
+        }
+    }
     public function clents2(Request $request)
     {
         if($request->ajax())
@@ -618,6 +882,24 @@ class KlentController2 extends Controller
             // return $this->clents2($request);
         }
     }
+
+    public function tavars333(Request $request)
+    {
+        if($request->id){
+            return $this->ctavar4($request);
+        }elseif($request->id && $request->date){
+            return $this->ctavars5($request);
+        }elseif($request->id && $request->date && $request->date2){
+            return $this->ctavars5($request);
+        }elseif($request->date){
+            return $this->ctavars6($request);
+        }elseif($request->date && $request->date2){
+            return $this->ctavars6($request);
+        }else{
+            // return $this->clents2($request);
+        }
+    }
+
     public function brlamclient(Request $request)
     {
         if($request->tavar_id){
@@ -750,6 +1032,116 @@ class KlentController2 extends Controller
         }
     }
 
+    public function ctavar4($request)
+    {
+        if($request->ajax())
+        {
+            $output = '';
+            $output2 = '';
+            $da = Ichkitavar::find($request->id);   
+            $data = Trvark::where('ichkitavar_id', $request->id)->get();     
+            $data222 = Trvarck::where('ichkitavar_id', $request->id)->get();     
+            $total_row = $data->count();
+            if($total_row > 0)
+            {
+                foreach($data as $row)
+                {
+                    $output .= '
+                    <tr style="border-bottom: 1px solid;">
+                        <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                        <td class="ui-widget-content">'.$row->tavar2->name.'</td>
+                        <td class="ui-widget-content">'.$row->hajm.'</td>
+                        <td class="ui-widget-content">'.$row->summa.'</td>
+                        <td class="ui-widget-content">'.$row->summa2.'</td>
+                        <td class="ui-widget-content">'.$row->summa3.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
+                    </tr>
+                    ';
+                }
+                foreach($data222 as $row)
+                {
+                    $output2 .= '
+                    <tr style="border-bottom: 1px solid;">
+                        <td class="ui-widget-content">'.$row->tavar2->name.'</td>
+                        <td class="ui-widget-content">'.$row->hajm.'</td>
+                        <td class="ui-widget-content">'.$row->summa2.'</td>
+                        <td class="ui-widget-content">'.$row->summa3.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
+                    </tr>
+                    ';
+                }
+            }
+            $foo = Clentitog::find(1);
+            if($foo){
+                $foo->tavarshtuk = 0;
+                $foo->shtuk = 0;
+                $foo->foiz = 0;
+                $foo->itog = 0;
+                $foo->opshi = 0;
+                $foo->save();
+                foreach ($data as $value) {            
+                    $fool = Clentitog::find(1);
+                    $shtuk = $fool->shtuk + $value->hajm;
+                    Clentitog::find(1)->update([
+                        'tavarshtuk'=>$total_row,
+                        'shtuk'=>$shtuk,
+                    ]);
+                }
+                foreach ($data222 as $value) {
+                    $fool2 = Clentitog::find(1);
+                    $a = $fool2->opshi + $value->summa3;
+                    Clentitog::find(1)->update([
+                        'opshi'=>$a,
+                    ]);
+                }
+                foreach ($data as $value) {
+                    $fool2 = Clentitog::find(1);
+                    $a = $fool2->foiz + $value->summa;
+                    Clentitog::find(1)->update([
+                        'foiz'=>$a,
+                    ]);
+                }
+            }else{
+                Clentitog::create([
+                    'tavarshtuk'=>0,
+                    'shtuk'=>0,
+                    'foiz'=>0,
+                    'itog'=>0,
+                    'opshi'=>0
+                ]);
+                foreach ($data as $value) {
+                    $foo = Clentitog::find(1);        
+                    $shtuk2 = $foo->shtuk + $value->hajm;
+                    Clentitog::find(1)->update([
+                        'tavarshtuk'=>$total_row,
+                        'shtuk'=>$shtuk2,
+                    ]);
+                }
+                foreach ($data222 as $value) {
+                    $fool2 = Clentitog::find(1);
+                    $a = $fool2->opshi + $value->summa3;
+                    Clentitog::find(1)->update([
+                        'opshi'=>$a,
+                    ]);
+                }
+                foreach ($data as $value) {
+                    $fool3 = Clentitog::find(1);
+                    $a1 = $fool3->foiz + $value->summa;
+                    Clentitog::find(1)->update([
+                        'foiz'=>$a1,
+                    ]);
+                }
+            }
+            $foo2 = Clentitog::find(1);
+            return response()->json([
+                'output'=>$output,
+                'output2'=>$output2,
+                'clent'=>$da,
+                'foo2'=>$foo2??[],
+            ]);
+        }
+    }
+
     public function clents5($request)
     {
         if($request->ajax())
@@ -865,6 +1257,117 @@ class KlentController2 extends Controller
             ]);
         }
     }
+
+    public function ctavars5($request)
+    {
+        if($request->ajax())
+        {
+            $output = '';
+            $output2 = '';
+            $da = Ichkitavar::find($request->id);   
+            $data = Trvark::where('ichkitavar_id', $request->id)->whereBetween('updated_at', [$request->date, $request->date2])->get();
+            $data222 = Trvarck::where('ichkitavar_id', $request->id)->whereBetween('updated_at', [$request->date, $request->date2])->get();     
+            $total_row = $data->count();
+            if($total_row > 0)
+            {
+                foreach($data as $row)
+                {
+                    $output .= '
+                    <tr style="border-bottom: 1px solid;">
+                        <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                        <td class="ui-widget-content">'.$row->tavar2->name.'</td>
+                        <td class="ui-widget-content">'.$row->hajm.'</td>
+                        <td class="ui-widget-content">'.$row->summa.'</td>
+                        <td class="ui-widget-content">'.$row->summa2.'</td>
+                        <td class="ui-widget-content">'.$row->summa3.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
+                    </tr>
+                    ';
+                }
+                foreach($data222 as $row)
+                {
+                    $output2 .= '
+                    <tr style="border-bottom: 1px solid;">
+                        <td class="ui-widget-content">'.$row->tavar2->name.'</td>
+                        <td class="ui-widget-content">'.$row->hajm.'</td>
+                        <td class="ui-widget-content">'.$row->summa2.'</td>
+                        <td class="ui-widget-content">'.$row->summa3.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
+                    </tr>
+                    ';
+                }
+            }
+            $foo = Clentitog::find(1);
+            if($foo){
+                $foo->tavarshtuk = 0;
+                $foo->shtuk = 0;
+                $foo->foiz = 0;
+                $foo->itog = 0;
+                $foo->opshi = 0;
+                $foo->save();
+                foreach ($data as $value) {            
+                    $fool = Clentitog::find(1);
+                    $shtuk = $fool->shtuk + $value->hajm;
+                    Clentitog::find(1)->update([
+                        'tavarshtuk'=>$total_row,
+                        'shtuk'=>$shtuk,
+                    ]);
+                }
+                foreach ($data222 as $value) {
+                    $fool2 = Clentitog::find(1);
+                    $a = $fool2->opshi + $value->summa3;
+                    Clentitog::find(1)->update([
+                        'opshi'=>$a,
+                    ]);
+                }
+                foreach ($data as $value) {
+                    $fool2 = Clentitog::find(1);
+                    $a = $fool2->foiz + $value->summa;
+                    Clentitog::find(1)->update([
+                        'foiz'=>$a,
+                    ]);
+                }
+            }else{
+                Clentitog::create([
+                    'tavarshtuk'=>0,
+                    'shtuk'=>0,
+                    'foiz'=>0,
+                    'itog'=>0,
+                    'opshi'=>0
+                ]);
+                foreach ($data as $value) {
+                    $foo = Clentitog::find(1);        
+                    $shtuk2 = $foo->shtuk + $value->hajm;
+                    Clentitog::find(1)->update([
+                        'tavarshtuk'=>$total_row,
+                        'shtuk'=>$shtuk2,
+                    ]);
+                }
+                foreach ($data222 as $value) {
+                    $fool2 = Clentitog::find(1);
+                    $a = $fool2->opshi + $value->summa3;
+                    Clentitog::find(1)->update([
+                        'opshi'=>$a,
+                    ]);
+                }
+                foreach ($data as $value) {
+                    $fool3 = Clentitog::find(1);
+                    $a1 = $fool3->foiz + $value->summa;
+                    Clentitog::find(1)->update([
+                        'foiz'=>$a1,
+                    ]);
+                }
+            }
+            $foo2 = Clentitog::find(1);
+            return response()->json([
+                'output'=>$output,
+                'output2'=>$output2,
+                'clent'=>$da,
+                'foo2'=>$foo2??[],
+            ]);
+        }
+    }
+
     public function clents6($request)
     {
         if($request->id){
@@ -1091,6 +1594,115 @@ class KlentController2 extends Controller
             }
         }
     }
+
+    public function ctavars6($request)
+    {
+        if($request->ajax())
+        {
+            $output = '';
+            $output2 = '';
+            $data = Trvark::whereBetween('updated_at', [$request->date, $request->date2])->get();
+            $data222 = Trvarck::whereBetween('updated_at', [$request->date, $request->date2])->get();     
+            $total_row = $data->count();
+            if($total_row > 0)
+            {
+                foreach($data as $row)
+                {
+                    $output .= '
+                    <tr style="border-bottom: 1px solid;">
+                        <td class="ui-widget-content">'.$row->tavar->name.'</td>
+                        <td class="ui-widget-content">'.$row->tavar2->name.'</td>
+                        <td class="ui-widget-content">'.$row->hajm.'</td>
+                        <td class="ui-widget-content">'.$row->summa.'</td>
+                        <td class="ui-widget-content">'.$row->summa2.'</td>
+                        <td class="ui-widget-content">'.$row->summa3.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
+                    </tr>
+                    ';
+                }
+                foreach($data222 as $row)
+                {
+                    $output2 .= '
+                    <tr style="border-bottom: 1px solid;">
+                        <td class="ui-widget-content">'.$row->tavar2->name.'</td>
+                        <td class="ui-widget-content">'.$row->hajm.'</td>
+                        <td class="ui-widget-content">'.$row->summa2.'</td>
+                        <td class="ui-widget-content">'.$row->summa3.'</td>
+                        <td class="ui-widget-content">'.$row->updated_at.'</td>
+                    </tr>
+                    ';
+                }
+            }
+            $foo = Clentitog::find(1);
+            if($foo){
+                $foo->tavarshtuk = 0;
+                $foo->shtuk = 0;
+                $foo->foiz = 0;
+                $foo->itog = 0;
+                $foo->opshi = 0;
+                $foo->save();
+                foreach ($data as $value) {            
+                    $fool = Clentitog::find(1);
+                    $shtuk = $fool->shtuk + $value->hajm;
+                    Clentitog::find(1)->update([
+                        'tavarshtuk'=>$total_row,
+                        'shtuk'=>$shtuk,
+                    ]);
+                }
+                foreach ($data222 as $value) {
+                    $fool2 = Clentitog::find(1);
+                    $a = $fool2->opshi + $value->summa3;
+                    Clentitog::find(1)->update([
+                        'opshi'=>$a,
+                    ]);
+                }
+                foreach ($data as $value) {
+                    $fool2 = Clentitog::find(1);
+                    $a = $fool2->foiz + $value->summa;
+                    Clentitog::find(1)->update([
+                        'foiz'=>$a,
+                    ]);
+                }
+            }else{
+                Clentitog::create([
+                    'tavarshtuk'=>0,
+                    'shtuk'=>0,
+                    'foiz'=>0,
+                    'itog'=>0,
+                    'opshi'=>0
+                ]);
+                foreach ($data as $value) {
+                    $foo = Clentitog::find(1);        
+                    $shtuk2 = $foo->shtuk + $value->hajm;
+                    Clentitog::find(1)->update([
+                        'tavarshtuk'=>$total_row,
+                        'shtuk'=>$shtuk2,
+                    ]);
+                }
+                foreach ($data222 as $value) {
+                    $fool2 = Clentitog::find(1);
+                    $a = $fool2->opshi + $value->summa3;
+                    Clentitog::find(1)->update([
+                        'opshi'=>$a,
+                    ]);
+                }
+                foreach ($data as $value) {
+                    $fool3 = Clentitog::find(1);
+                    $a1 = $fool3->foiz + $value->summa;
+                    Clentitog::find(1)->update([
+                        'foiz'=>$a1,
+                    ]);
+                }
+            }
+            $foo2 = Clentitog::find(1);
+            return response()->json([
+                'output'=>$output,
+                'output2'=>$output2,
+                'foo2'=>$foo2??[],
+            ]);
+        }
+    }
+
     public function clents04($request)
     {
         if($request->ajax())
@@ -1624,10 +2236,12 @@ class KlentController2 extends Controller
             $variable = Ichkitavar::whereBetween('updated_at', [$request->date, $request->date2])->get();
             $data = Tavar::all();
             $adress = Adress::all();
+            $jonatilgan = Jonatilgan2::count();
             if(Session::has('IDIE')){
               $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
               return view('tavar2',[
                   'brends'=>$brends,
+                  'jonatilgan'=>$jonatilgan,
                   'ichkitavar'=>$variable,
                   'data'=>$data,
                   'adress'=>$adress,
@@ -1639,10 +2253,12 @@ class KlentController2 extends Controller
             $variable = Ichkitavar::where('updated_at', ">=", $request->date)->get();
             $data = Tavar::all();
             $adress = Adress::all();
+            $jonatilgan = Jonatilgan2::count();
             if(Session::has('IDIE')){
               $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
               return view('tavar2',[
                   'brends'=>$brends,
+                  'jonatilgan'=>$jonatilgan,
                   'ichkitavar'=>$variable,
                   'data'=>$data,
                   'adress'=>$adress,
@@ -1654,10 +2270,12 @@ class KlentController2 extends Controller
             $variable = Ichkitavar::where('updated_at', ">=", $request->date2)->get();
             $data = Tavar::all();
             $adress = Adress::all();
+            $jonatilgan = Jonatilgan2::count();
             if(Session::has('IDIE')){
               $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
               return view('tavar2',[
                   'brends'=>$brends,
+                  'jonatilgan'=>$jonatilgan,
                   'ichkitavar'=>$variable,
                   'data'=>$data,
                   'adress'=>$adress,
@@ -1673,10 +2291,12 @@ class KlentController2 extends Controller
     public function clent2()
     {
         $tavar = Tavar::all();
+        $jonatilgan = Jonatilgan2::count();
         if(Session::has('IDIE')){
             $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
             return view('clent2',[
                 'brends'=>$brends,
+                'jonatilgan'=>$jonatilgan,
                 'tavar'=>$tavar,
             ]);
         }else{
@@ -1686,10 +2306,12 @@ class KlentController2 extends Controller
 
     public function prodacha()
     {
+        $jonatilgan = Jonatilgan2::count();
         if(Session::has('IDIE')){
             $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
             return view('prodacha',[
                 'brends'=>$brends,
+                'jonatilgan'=>$jonatilgan,
             ]);
         }else{
             return redirect('/logaut');
@@ -1698,10 +2320,29 @@ class KlentController2 extends Controller
 
     public function sqladiski()
     {
+        
+        $jonatilgan = Jonatilgan2::count();
         if(Session::has('IDIE')){
             $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
             return view('sqladski',[
                 'brends'=>$brends,
+                'jonatilgan'=>$jonatilgan,
+            ]);
+        }else{
+            return redirect('/logaut');
+        }
+    }
+
+    public function kelgantovar2()
+    {
+        $jonatil = Jonatilgan2::all();
+        $jonatilgan = Jonatilgan2::count();
+        if(Session::has('IDIE')){
+            $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
+            return view('kelgantovar',[
+                'brends'=>$brends,
+                'jonatilgan'=>$jonatilgan,
+                'jonatil'=>$jonatil,
             ]);
         }else{
             return redirect('/logaut');
@@ -1796,15 +2437,13 @@ class KlentController2 extends Controller
     {
         $data = Sqladpoytaxt::all();
         foreach($data as $data2){
-            $sss = Tayyorsqlad::where('tavar_id', $data2->tavar_id)
-                        ->where('adress', $data2->adress)
-                        ->where('tavar2_id', $data2->tavar2_id)
+            $sss = Jonatilgan::where('tavarp_id', $data2->tavar_id)
+                        ->where('tavar2p_id', $data2->tavar2_id)
                         ->first();
             if($sss){
                 $swer = $sss->hajm + $data2->hajm;
-                Tayyorsqlad::where('tavar_id', $data2->tavar_id)
-                        ->where('adress', $data2->adress)
-                        ->where('tavar2_id', $data2->tavar2_id)
+                Jonatilgan::where('tavarp_id', $data2->tavar_id)
+                        ->where('tavar2p_id', $data2->tavar2_id)
                         ->update([
                             'name' =>$data2->name, 
                             'raqam' =>$data2->raqam, 
@@ -1814,22 +2453,20 @@ class KlentController2 extends Controller
                             'summa3' =>$data2->summa3,
                         ]);
                 $ssss = Ichkitavar::where('tavar_id', $data2->tavar_id)
-                                ->where('adress', $data2->adress)
                                 ->where('tavar2_id', $data2->tavar2_id)
                                 ->first();
                 $ccc = $ssss->hajm - $data2->hajm;
                 Ichkitavar::where('tavar_id', $data2->tavar_id)
-                        ->where('adress', $data2->adress)
                         ->where('tavar2_id', $data2->tavar2_id)
                         ->update([
                             'hajm'=>$ccc
                         ]);
                 Sqladpoytaxt::where('id', ">", 0)->delete();
             }else{
-                Tayyorsqlad::create([
-                    'tavar_id' =>$data2->tavar_id, 
+                Jonatilgan::create([
+                    'tavarp_id' =>$data2->tavar_id, 
                     'adress' =>$data2->adress, 
-                    'tavar2_id' =>$data2->tavar2_id, 
+                    'tavar2p_id' =>$data2->tavar2_id, 
                     'name' =>$data2->name, 
                     'raqam' =>$data2->raqam, 
                     'hajm' =>$data2->hajm, 
@@ -1838,12 +2475,10 @@ class KlentController2 extends Controller
                     'summa3' =>$data2->summa3,
                 ]);
                 $ssss = Ichkitavar::where('tavar_id', $data2->tavar_id)
-                                ->where('adress', $data2->adress)
                                 ->where('tavar2_id', $data2->tavar2_id)
                                 ->first();
                 $ccc = $ssss->hajm - $data2->hajm;
                 Ichkitavar::where('tavar_id', $data2->tavar_id)
-                            ->where('adress', $data2->adress)
                             ->where('tavar2_id', $data2->tavar2_id)
                             ->update([
                                 'hajm'=>$ccc
@@ -1852,5 +2487,44 @@ class KlentController2 extends Controller
             }
         }
         return response()->json(['status'=>200]);
+    }
+
+    
+    public function sinimayt(Request $request)
+    {
+        $datap = Jonatilgan2::all();
+        foreach($datap as $data2){
+            $sss = Ichkitavar::where('tavar_id', $data2->tavar_id)
+                        ->where('tavar_id', $data2->tavar2_id)
+                        ->first();
+            if($sss){
+                $swer = $sss->hajm + $data2->hajm;
+                Ichkitavar::where('tavar_id', $data2->tavar_id)
+                        ->where('tavar_id', $data2->tavar2_id)
+                        ->update([
+                            'name' =>$data2->name, 
+                            'raqam' =>$data2->raqam, 
+                            'hajm' =>$swer, 
+                            'summa' =>$data2->summa, 
+                            'summa2' =>$data2->summa2, 
+                            'summa3' =>$data2->summa3,
+                        ]);           
+                Jonatilgan2::where('id', ">", 0)->delete();
+            }else{
+                Ichkitavar::create([
+                    'tavar_id' =>$data2->tavar_id, 
+                    'adress' =>$data2->adress,
+                    'tavar2_id' =>$data2->tavar2_id,
+                    'name' =>$data2->name,
+                    'raqam' =>$data2->raqam, 
+                    'hajm' =>$data2->hajm, 
+                    'summa' =>$data2->summa, 
+                    'summa2' =>$data2->summa2, 
+                    'summa3' =>$data2->summa3,
+                ]);
+                Jonatilgan2::where('id', ">", 0)->delete();
+            }
+        }
+        return redirect('/glavninachal');
     }
 }

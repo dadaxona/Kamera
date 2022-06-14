@@ -421,32 +421,28 @@ $( function() {
     var date2 = $("#date2").val();
     var oydi = $("#oydi").val();
     let _token  = $('meta[name="csrf-token"]').attr('content');
-      // if(oydi){
-        $.ajax({
-              url:"{{ route('clents3') }}",
-              method:'POST',
-              data:{
-                id: oydi,
-                tavar_id: tavar_id,
-                date: date,
-                date2: date2,
-                _token: _token
-              },
-              dataType:'json',
-              success:function(data)
-              {
-                $('#savdo').html(data.output);
-                $('#dolg').html(data.output2);
-                fetch_customer_data();
-                $("#tavarshtuk2").val(data.foo2.tavarshtuk);
-                $("#shtuk2").val(data.foo2.shtuk);
-                $("#foiz2").val(data.foo2.foiz);
-                $("#itoge2").val(data.foo2.opshi);
-              }
-          });
-      // }else{
-      //   toastr.error("Выберите клент").fadeOut(1500);
-      // }
+      $.ajax({
+            url:"{{ route('clents3') }}",
+            method:'POST',
+            data:{
+              id: oydi,
+              tavar_id: tavar_id,
+              date: date,
+              date2: date2,
+              _token: _token
+            },
+            dataType:'json',
+            success:function(data)
+            {
+              $('#savdo').html(data.output);
+              $('#dolg').html(data.output2);
+              fetch_customer_data();
+              $("#tavarshtuk2").val(data.foo2.tavarshtuk);
+              $("#shtuk2").val(data.foo2.shtuk);
+              $("#foiz2").val(data.foo2.foiz);
+              $("#itoge2").val(data.foo2.opshi);
+            }
+        });
     });
 
     $(document).on('change', "#date", function(){

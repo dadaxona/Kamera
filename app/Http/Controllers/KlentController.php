@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\KlentController2;
 use App\Models\Ishchilar;
+use App\Models\Jonatilgan2;
 use App\Models\Sqladpoytaxt;
 use App\Models\Tavar2;
 use App\Models\Tayyorsqlad;
@@ -384,8 +385,10 @@ class KlentController extends KlentController2
     public function index()
     {
         if(Session::has('IDIE')){
+        $jonatilgan = Jonatilgan2::count();
           $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
           return view('tavar',[
+            'jonatilgan'=>$jonatilgan,
               'brends'=>$brends
           ]);
         }else{
@@ -397,8 +400,10 @@ class KlentController extends KlentController2
     {
         $data = Tavar::all();
         if(Session::has('IDIE')){
+        $jonatilgan = Jonatilgan2::count();
           $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
           return view('tavartip',[
+            'jonatilgan'=>$jonatilgan,
               'brends'=>$brends,
               'tovar'=>$data
           ]);
@@ -621,8 +626,10 @@ class KlentController extends KlentController2
     {
         $tavar = Tavar::paginate(10);
         if(Session::has('IDIE')){
+        $jonatilgan = Jonatilgan2::count();
           $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
           return view('adress',[
+            'jonatilgan'=>$jonatilgan,
               'brends'=>$brends,
               'tavar'=>$tavar,
           ]);
@@ -635,8 +642,10 @@ class KlentController extends KlentController2
     {
         $tavar = Tavar::paginate(10);
         if(Session::has('IDIE')){
+        $jonatilgan = Jonatilgan2::count();
           $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
           return view('ombor',[
+            'jonatilgan'=>$jonatilgan,
               'brends'=>$brends,
               'tavar'=>$tavar,
           ]);
@@ -649,8 +658,10 @@ class KlentController extends KlentController2
     {
         $adress = Adress::paginate(10);
         if(Session::has('IDIE')){
+        $jonatilgan = Jonatilgan2::count();
           $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
           return view('adress2',[
+            'jonatilgan'=>$jonatilgan,
               'brends'=>$brends,
               'adress'=>$adress,
           ]);
@@ -787,6 +798,7 @@ class KlentController extends KlentController2
                 <tr ondblclick="plus('.$row->id.')" style="border-bottom: 1px solid;">
                 <td class="ui-widget-content">'.$row->name.'</td>
                 <td class="ui-widget-content">'.$row->hajm.'</td>
+                <td class="ui-widget-content">'.$row->summa3.'</td>
                 </tr>
                 ';
             }

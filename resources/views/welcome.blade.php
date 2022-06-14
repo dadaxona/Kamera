@@ -208,18 +208,36 @@
                           </li>
                       </ul>
                       <ul class="nav-right">
-                          <li class="header-notification">
-                              <a href="#!" class="waves-effect waves-light">
-                                  <i class="ti-bell"></i>
-                                  <span class="badge bg-c-red"></span>
-                              </a>
-                              <ul class="show-notification">
-                                  <li>
-                                      <h6>Notifications</h6>
-                                      <label class="label label-danger">New</label>
-                                  </li>
-                              </ul>
-                          </li>
+                        @if ($jonatilgan > 0)
+                        <li class="header-notification">
+                            <a href="#" class="waves-effect waves-light">
+                                <i class="ti-bell"></i>
+                                <span class="badge bg-c-red"></span>
+                            </a>
+                            <ul class="show-notification">
+                                <li>
+                                <a href="{{ route('kelgantovar2') }}" class="waves-effect waves-light">
+                                  <h6>Товар жонатилди</h6>
+                                    <label class="label label-danger">New</label>
+                                  </a>
+                                </li>
+                            </ul>
+                        </li>                            
+                        @else
+                        <li class="header-notification">
+                            <a href="#" class="waves-effect waves-light">
+                                <i class="ti-bell"></i>
+                                <span class=""></span>
+                            </a>
+                            <ul class="show-notification">
+                                <li>
+                                <a href="#" class="waves-effect waves-light">
+                                  <h6>Жонатилган товар йок</h6>
+                                  </a>
+                                </li>
+                            </ul>
+                        </li>                            
+                        @endif
                           <li class="user-profile header-notification">
                               <a href="#!" class="waves-effect waves-light">
                                   <img src="assets/images/a.jpg" class="img-radius" alt="User-Profile-Image">

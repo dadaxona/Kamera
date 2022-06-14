@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tayyorsqlad extends Model
+class Jonatilgan extends Model
 {
     use HasFactory;
     public $fillable = ['tavarp_id', 'adress', 'tavar2p_id', 'name', 'raqam', 'hajm', 'summa', 'summa2', 'summa3', 'kurs', 'kurs2'];

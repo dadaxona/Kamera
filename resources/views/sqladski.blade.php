@@ -191,6 +191,14 @@
 $( function() {
     $( "#tbody3" ).selectable();
   } );
+//   $( function() {
+//     $( "#tbody2" ).selectable();
+//   } );
+
+//   $( function() {
+//     $( "#tbody" ).selectable();
+//   } );
+
     $(document).ready(function(){
         fetch_customer_data();
         function fetch_customer_data(query = '')

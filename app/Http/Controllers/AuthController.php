@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Drektor;
 use App\Models\Ichkitavar;
 use App\Models\Itogo;
+use App\Models\Jonatilgan2;
 use App\Models\Karzina;
 use App\Models\Tavar;
 use App\Models\User;
@@ -85,12 +86,14 @@ class AuthController extends Controller
     {
         $foo = Itogo::find(1);
         $clents = User::all();
+        $jonatilgan = Jonatilgan2::count();
         if(Session::has('IDIE')){
             $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
             return view('sotuv',[
                 'brends'=>$brends,
                 'itogs'=>$foo,
-                'clents'=>$clents
+                'clents'=>$clents,
+                'jonatilgan'=>$jonatilgan
             ]);
         }else{
             return redirect('/logaut');
@@ -108,10 +111,12 @@ class AuthController extends Controller
 
     public function profil()
     {
+        $jonatilgan = Jonatilgan2::count();
         if(Session::has('IDIE')){
             $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
             return view('auth.password',[
                 'brends'=>$brends,
+                'jonatilgan'=>$jonatilgan
             ]);
         }else{
             return redirect('/logaut');
@@ -121,10 +126,12 @@ class AuthController extends Controller
 
     public function setting()
     {
+        $jonatilgan = Jonatilgan2::count();
         if(Session::has('IDIE')){
             $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
             return view('auth.setting',[
                 'brends'=>$brends,
+                'jonatilgan'=>$jonatilgan
             ]);
         }else{
             return redirect('/logaut');

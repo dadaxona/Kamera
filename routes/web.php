@@ -102,10 +102,14 @@ Route::get('datasearche', [KlentController::class, 'datasearche'])->name('datase
 Route::post('search', [KlentController::class, 'search'])->name('search');
 Route::get('clent2', [KlentController::class, 'clent2'])->name('clent2');
 Route::post('vseclent', [KlentController::class, 'vseclent'])->name('vseclent');
+Route::get('tavarvseme', [KlentController::class, 'tavarvseme'])->name('tavarvseme');
 Route::get('clent_tip', [KlentController::class, 'clent_tip'])->name('clent_tip');
+Route::get('tav', [KlentController::class, 'tav'])->name('tav');
 Route::get('savdobirlamchi', [KlentController::class, 'savdobirlamchi'])->name('savdobirlamchi');
 Route::get('clents2', [KlentController::class, 'clents2'])->name('clents2');
+Route::get('tavarxisob', [KlentController::class, 'tavarxisob'])->name('tavarxisob');
 Route::post('clents3', [KlentController::class, 'clents3'])->name('clents3');
+Route::post('tavars333', [KlentController::class, 'tavars333'])->name('tavars333');
 Route::post('brlamclient', [KlentController::class, 'brlamclient'])->name('brlamclient');
 
 Route::get('prodacha', [KlentController::class, 'prodacha'])->name('prodacha');
@@ -116,6 +120,8 @@ Route::post('plussqlad', [KlentController::class, 'plussqlad'])->name('plussqlad
 Route::post('minussqlad', [KlentController::class, 'minussqlad'])->name('minussqlad');
 Route::post('udalitsqlad', [KlentController::class, 'udalitsqlad'])->name('udalitsqlad');
 Route::get('yangilashsqlad', [KlentController::class, 'yangilashsqlad'])->name('yangilashsqlad');
+Route::get('kelgantovar2', [KlentController::class, 'kelgantovar2'])->name('kelgantovar2');
 Route::post('saqlashsqlad', [KlentController::class, 'saqlashsqlad'])->name('saqlashsqlad');
 Route::post('tayyorsqlad', [KlentController::class, 'tayyorsqlad'])->name('tayyorsqlad');
+Route::post('sinimayt', [KlentController::class, 'sinimayt'])->name('sinimayt');
 
