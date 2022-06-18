@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Clentmalumot;
 use App\Models\Drektor;
 use App\Models\Ichkitavar;
 use App\Models\Itogo;
@@ -84,6 +85,9 @@ class AuthController extends Controller
      
     public function dashbord()
     {
+        $dt= Carbon::now('Asia/Tashkent');  
+        $sana = $dt->toDateString();
+        $sana2 = Clentmalumot::where('sana', $sana)->first();
         $foo = Itogo::find(1);
         $clents = User::all();
         $jonatilgan = Jonatilgan2::count();
@@ -93,7 +97,8 @@ class AuthController extends Controller
                 'brends'=>$brends,
                 'itogs'=>$foo,
                 'clents'=>$clents,
-                'jonatilgan'=>$jonatilgan
+                'jonatilgan'=>$jonatilgan,
+                'sana2'=>$sana2,
             ]);
         }else{
             return redirect('/logaut');
@@ -111,27 +116,36 @@ class AuthController extends Controller
 
     public function profil()
     {
+        $dt= Carbon::now('Asia/Tashkent');  
+        $sana = $dt->toDateString();
         $jonatilgan = Jonatilgan2::count();
+        $sana2 = Clentmalumot::where('sana', $sana)->first();
         if(Session::has('IDIE')){
             $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
             return view('auth.password',[
                 'brends'=>$brends,
-                'jonatilgan'=>$jonatilgan
+                'jonatilgan'=>$jonatilgan,
+                'sana2'=>$sana2,
+
             ]);
         }else{
             return redirect('/logaut');
-        }
-        
+        }        
     }
 
     public function setting()
     {
+        $dt= Carbon::now('Asia/Tashkent');  
+        $sana = $dt->toDateString();
+        $sana2 = Clentmalumot::where('sana', $sana)->first();
         $jonatilgan = Jonatilgan2::count();
         if(Session::has('IDIE')){
             $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
             return view('auth.setting',[
                 'brends'=>$brends,
-                'jonatilgan'=>$jonatilgan
+                'jonatilgan'=>$jonatilgan,
+                'sana2'=>$sana2,
+
             ]);
         }else{
             return redirect('/logaut');

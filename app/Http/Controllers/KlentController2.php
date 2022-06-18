@@ -12,6 +12,7 @@ use App\Models\Admin;
 use App\Models\Adress;
 use App\Models\Arxiv;
 use App\Models\Clentitog;
+use App\Models\Clentmalumot;
 use App\Models\Data;
 use App\Models\Drektor;
 use App\Models\Ichkitavar;
@@ -2237,11 +2238,15 @@ class KlentController2 extends Controller
             $data = Tavar::all();
             $adress = Adress::all();
             $jonatilgan = Jonatilgan2::count();
+                   $dt= Carbon::now('Asia/Tashkent');  
+        $sana = $dt->toDateString();
+        $sana2 = Clentmalumot::where('sana', $sana)->first();
             if(Session::has('IDIE')){
               $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
               return view('tavar2',[
                   'brends'=>$brends,
                   'jonatilgan'=>$jonatilgan,
+                   'sana2'=>$sana2,
                   'ichkitavar'=>$variable,
                   'data'=>$data,
                   'adress'=>$adress,
@@ -2254,11 +2259,15 @@ class KlentController2 extends Controller
             $data = Tavar::all();
             $adress = Adress::all();
             $jonatilgan = Jonatilgan2::count();
+                   $dt= Carbon::now('Asia/Tashkent');  
+        $sana = $dt->toDateString();
+        $sana2 = Clentmalumot::where('sana', $sana)->first();
             if(Session::has('IDIE')){
               $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
               return view('tavar2',[
                   'brends'=>$brends,
                   'jonatilgan'=>$jonatilgan,
+                   'sana2'=>$sana2,
                   'ichkitavar'=>$variable,
                   'data'=>$data,
                   'adress'=>$adress,
@@ -2271,11 +2280,15 @@ class KlentController2 extends Controller
             $data = Tavar::all();
             $adress = Adress::all();
             $jonatilgan = Jonatilgan2::count();
+                   $dt= Carbon::now('Asia/Tashkent');  
+        $sana = $dt->toDateString();
+        $sana2 = Clentmalumot::where('sana', $sana)->first();
             if(Session::has('IDIE')){
               $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
               return view('tavar2',[
                   'brends'=>$brends,
                   'jonatilgan'=>$jonatilgan,
+                   'sana2'=>$sana2,
                   'ichkitavar'=>$variable,
                   'data'=>$data,
                   'adress'=>$adress,
@@ -2292,11 +2305,15 @@ class KlentController2 extends Controller
     {
         $tavar = Tavar::all();
         $jonatilgan = Jonatilgan2::count();
+               $dt= Carbon::now('Asia/Tashkent');  
+        $sana = $dt->toDateString();
+        $sana2 = Clentmalumot::where('sana', $sana)->first();
         if(Session::has('IDIE')){
             $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
             return view('clent2',[
                 'brends'=>$brends,
                 'jonatilgan'=>$jonatilgan,
+                 'sana2'=>$sana2,
                 'tavar'=>$tavar,
             ]);
         }else{
@@ -2307,11 +2324,15 @@ class KlentController2 extends Controller
     public function prodacha()
     {
         $jonatilgan = Jonatilgan2::count();
+               $dt= Carbon::now('Asia/Tashkent');  
+        $sana = $dt->toDateString();
+        $sana2 = Clentmalumot::where('sana', $sana)->first();
         if(Session::has('IDIE')){
             $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
             return view('prodacha',[
                 'brends'=>$brends,
                 'jonatilgan'=>$jonatilgan,
+                 'sana2'=>$sana2,
             ]);
         }else{
             return redirect('/logaut');
@@ -2322,11 +2343,15 @@ class KlentController2 extends Controller
     {
         
         $jonatilgan = Jonatilgan2::count();
+               $dt= Carbon::now('Asia/Tashkent');  
+        $sana = $dt->toDateString();
+        $sana2 = Clentmalumot::where('sana', $sana)->first();
         if(Session::has('IDIE')){
             $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
             return view('sqladski',[
                 'brends'=>$brends,
                 'jonatilgan'=>$jonatilgan,
+                 'sana2'=>$sana2,
             ]);
         }else{
             return redirect('/logaut');
@@ -2337,11 +2362,15 @@ class KlentController2 extends Controller
     {
         $jonatil = Jonatilgan2::all();
         $jonatilgan = Jonatilgan2::count();
+               $dt= Carbon::now('Asia/Tashkent');  
+        $sana = $dt->toDateString();
+        $sana2 = Clentmalumot::where('sana', $sana)->first();
         if(Session::has('IDIE')){
             $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
             return view('kelgantovar',[
                 'brends'=>$brends,
                 'jonatilgan'=>$jonatilgan,
+                 'sana2'=>$sana2,
                 'jonatil'=>$jonatil,
             ]);
         }else{
