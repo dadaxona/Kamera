@@ -28,18 +28,22 @@ Route::get('tavar_live', [KlentController::class, 'tavar_live'])->name('tavar_li
 Route::get('tavar2_live', [KlentController::class, 'tavar2_live'])->name('tavar2_live');
 Route::get('live_adress', [KlentController::class, 'live_adress'])->name('live_adress');
 Route::get('live_clent', [KlentController::class, 'live_clent'])->name('live_clent');
+Route::get('malumotser_live', [KlentController::class, 'malumotser_live'])->name('malumotser_live');
 Route::get('live_admin', [KlentController::class, 'live_admin'])->name('live_admin');
 Route::get('live_ishchi', [KlentController::class, 'live_ishchi'])->name('live_ishchi');
 Route::get('index', [KlentController::class, 'index'])->name('index');
 Route::get('indextip', [KlentController::class, 'indextip'])->name('indextip');
 Route::post('store', [KlentController::class, 'store'])->name('store');
+Route::post('storemalumot', [KlentController::class, 'storemalumot'])->name('storemalumot');
 Route::post('storeishchi', [KlentController::class, 'storeishchi'])->name('storeishchi');
 Route::post('storeadmin', [KlentController::class, 'storeadmin'])->name('storeadmin');
 Route::get('show/{id}', [KlentController::class, 'show']);
+Route::get('showklentmalumot/{id}', [KlentController::class, 'showklentmalumot']);
 Route::get('showishchi/{id}', [KlentController::class, 'showishchi']);
 Route::get('showadmin/{id}', [KlentController::class, 'showadmin']);
 Route::post('update', [KlentController::class, 'update'])->name('update');
 Route::post('delete/{id}', [KlentController::class, 'destroy']);
+Route::post('deletemijoz/{id}', [KlentController::class, 'deletemijoz']);
 Route::post('deleteishchi/{id}', [KlentController::class, 'deleteishchi']);
 Route::post('deleteadmin/{id}', [KlentController::class, 'deleteadmin']);
 
