@@ -18,6 +18,7 @@ use App\Models\Updatetavr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\KlentController2;
+use App\Models\Clentmalumot;
 use App\Models\Ishchilar;
 use App\Models\Jonatilgan2;
 use App\Models\Sqladpoytaxt;
@@ -201,6 +202,66 @@ class KlentController extends KlentController2
         }
     }
 
+    public function malumotser_live(Request $request)
+    {
+        if($request->ajax())
+        {
+        $output = '';
+        $query = $request->get('query');
+        if($query != '')
+        {
+        $data = DB::table('clentmalumots')
+                ->where('namese2', 'like', '%'.$query.'%')
+                ->orderBy('id', 'DESC')
+                ->get();
+            
+        }
+        else
+        {
+        $data = DB::table('clentmalumots')
+            ->orderBy('id', 'DESC')
+            ->get();
+        }
+        $total_row = $data->count();
+        if($total_row > 0)
+        {
+            foreach($data as $row)
+            {               
+                $output .= '
+                <tr onclick="foo('.$row->id.')" style="border-bottom: 1px solid;">
+                    <td class="ui-widget-content">'.$row->namese2.'</td>
+                    <td class="ui-widget-content">'.$row->familiya.'</td>
+                    <td class="ui-widget-content">'.$row->sana.'</td>
+                    <td class="ui-widget-content">'.$row->tels.'</td>
+                    <td class="ui-widget-content">'.$row->tels2.'</td>
+                    <td class="ui-widget-content">'.$row->region.'</td>
+                    <td class="ui-widget-content">'.$row->adress.'</td>
+                    <td class="ui-widget-content">'.$row->orentr.'</td>
+                    <td class="ui-widget-content">'.$row->ishjoyi.'</td>
+                    <td class="ui-widget-content">'.$row->lavozim.'</td>
+                    <td class="ui-widget-content">'.$row->qoshimachaish.'</td>
+                    <td class="ui-widget-content">'.$row->qoshimcha.'</td>
+                    <td class="ui-widget-content">'.$row->coment.'</td>
+                </tr>
+              ';
+            }
+        }
+        else
+        {
+        $output = '
+            <tr>
+                <td align="center" colspan="18">No Data Found</td>
+            </tr>
+            ';
+        }
+        $data = array(
+            'table_data'  => $output,
+        );
+
+        echo json_encode($data);
+        }
+    }
+
     public function live_clent(Request $request)
     {
         if($request->ajax())
@@ -244,6 +305,11 @@ class KlentController extends KlentController2
                       <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
                     </svg>
                   </a>
+                  <a href="javascript:void(0)" id="malumotclent" data-id="'.$row->id.'" class="mx-3" style="color: blue">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
+                        <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z"/>
+                    </svg>
+                    </a>
                 </td>
               </tr>
               ';
@@ -384,11 +450,15 @@ class KlentController extends KlentController2
 
     public function index()
     {
+             $dt= Carbon::now('Asia/Tashkent');  
+        $sana = $dt->toDateString();
+        $sana2 = Clentmalumot::where('sana', $sana)->first();
         if(Session::has('IDIE')){
         $jonatilgan = Jonatilgan2::count();
           $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
           return view('tavar',[
             'jonatilgan'=>$jonatilgan,
+             'sana2'=>$sana2,
               'brends'=>$brends
           ]);
         }else{
@@ -399,11 +469,15 @@ class KlentController extends KlentController2
     public function indextip()
     {
         $data = Tavar::all();
+             $dt= Carbon::now('Asia/Tashkent');  
+        $sana = $dt->toDateString();
+        $sana2 = Clentmalumot::where('sana', $sana)->first();
         if(Session::has('IDIE')){
         $jonatilgan = Jonatilgan2::count();
           $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
           return view('tavartip',[
             'jonatilgan'=>$jonatilgan,
+             'sana2'=>$sana2,
               'brends'=>$brends,
               'tovar'=>$data
           ]);
@@ -425,6 +499,11 @@ class KlentController extends KlentController2
         }else{            
             return response()->json(['code'=>0, 'msg'=>'Малумотларни толдирилмаган', 'error'=>$validator->errors()->toArray()]);
         }
+    }
+
+    public function storemalumot(Request $request, KlentServis $model)
+    {
+        return $model->storemalumot($request);     
     }
 
     public function storeishchi(Request $request, KlentServis $model)
@@ -459,7 +538,13 @@ class KlentController extends KlentController2
         $post = User::find($id);    
         return response()->json($post);
     }
-
+        
+    public function showklentmalumot($id)
+    {
+        $post = Clentmalumot::find($id);    
+        return response()->json($post);
+    }
+    
     public function showishchi($id)
     {
         $post = Ishchilar::find($id);    
@@ -477,6 +562,11 @@ class KlentController extends KlentController2
         return $model->delete($id);
     }
 
+    public function deletemijoz($id, KlentServis $model)
+    {
+        return $model->deletemijoz($id);
+    }
+    
     public function deleteishchi($id, KlentServis $model)
     {
         return $model->deleteishchi($id);
@@ -625,11 +715,15 @@ class KlentController extends KlentController2
     public function adress()
     {
         $tavar = Tavar::paginate(10);
+             $dt= Carbon::now('Asia/Tashkent');  
+        $sana = $dt->toDateString();
+        $sana2 = Clentmalumot::where('sana', $sana)->first();
         if(Session::has('IDIE')){
         $jonatilgan = Jonatilgan2::count();
           $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
           return view('adress',[
             'jonatilgan'=>$jonatilgan,
+             'sana2'=>$sana2,
               'brends'=>$brends,
               'tavar'=>$tavar,
           ]);
@@ -641,11 +735,15 @@ class KlentController extends KlentController2
     public function ombor()
     {
         $tavar = Tavar::paginate(10);
+             $dt= Carbon::now('Asia/Tashkent');  
+        $sana = $dt->toDateString();
+        $sana2 = Clentmalumot::where('sana', $sana)->first();
         if(Session::has('IDIE')){
         $jonatilgan = Jonatilgan2::count();
           $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
           return view('ombor',[
             'jonatilgan'=>$jonatilgan,
+             'sana2'=>$sana2,
               'brends'=>$brends,
               'tavar'=>$tavar,
           ]);
@@ -657,11 +755,15 @@ class KlentController extends KlentController2
     public function index2()
     {
         $adress = Adress::paginate(10);
+             $dt= Carbon::now('Asia/Tashkent');  
+        $sana = $dt->toDateString();
+        $sana2 = Clentmalumot::where('sana', $sana)->first();
         if(Session::has('IDIE')){
         $jonatilgan = Jonatilgan2::count();
           $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
           return view('adress2',[
             'jonatilgan'=>$jonatilgan,
+             'sana2'=>$sana2,
               'brends'=>$brends,
               'adress'=>$adress,
           ]);

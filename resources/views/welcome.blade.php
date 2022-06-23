@@ -69,6 +69,21 @@
         .rty2{
             width: 100%;
         }
+        .exstrapro{
+            height: 550px;
+        }
+        .wizzz{
+            width: 150%;
+        }
+        #post{
+            background-color: white;
+            display: none;
+            border-radius: 12px;
+            border: 1px solid;
+            width: 99%;
+            margin: auto;
+            position: absolute;
+        }
         .buts{
             height: 35px;
             padding: 7px;
@@ -150,6 +165,12 @@
     #tavarlar .ui-selected { background: #277890; color: white; }
     #tavarlar { list-style-type: none; margin: 0; padding: 0; width: 60%; }
     #tavarlar tr { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+
+    #feedback { font-size: 1.4em; }
+    #malumotser .ui-selecting { background: #277890; }
+    #malumotser .ui-selected { background: #277890; color: white; }
+    #malumotser { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+    #malumotser tr { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
     </style>
 
   </head>
@@ -214,29 +235,65 @@
                                 <i class="ti-bell"></i>
                                 <span class="badge bg-c-red"></span>
                             </a>
+                            @if ($sana2)
                             <ul class="show-notification">
                                 <li>
+                                    <a href="{{ route('kelgantovar2') }}" class="waves-effect waves-light">
+                                         <h6>Товар жонатилди</h6>
+                                        <label class="label label-danger">New</label>
+                                    </a>
+                                </li>
+                                <ul class="show-notification">
+                                    <li>
+                                        <a onclick="tugilgankun({{ $sana2->id }})" class="waves-effect waves-light">
+                                            <h6>Клентнинг тугилган куни</h6>
+                                            <label class="label label-danger">New</label>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </ul>
+                            @else
+                            <ul class="show-notification">
+                            <li>
                                 <a href="{{ route('kelgantovar2') }}" class="waves-effect waves-light">
                                   <h6>Товар жонатилди</h6>
                                     <label class="label label-danger">New</label>
                                   </a>
                                 </li>
                             </ul>
+                            @endif
                         </li>                            
                         @else
-                        <li class="header-notification">
-                            <a href="#" class="waves-effect waves-light">
-                                <i class="ti-bell"></i>
-                                <span class=""></span>
-                            </a>
-                            <ul class="show-notification">
-                                <li>
+                            @if ($sana2)
+                            <li class="header-notification">
                                 <a href="#" class="waves-effect waves-light">
-                                  <h6>Жонатилган товар йок</h6>
-                                  </a>
-                                </li>
-                            </ul>
-                        </li>                            
+                                    <i class="ti-bell"></i>
+                                    <span class="badge bg-c-red"></span>
+                                </a>
+                                <ul class="show-notification">
+                                    <li>
+                                    <a onclick="tugilgankun({{ $sana2->id }})" class="waves-effect waves-light">
+                                        <h6>Клентнинг тугилган куни</h6>
+                                        <label class="label label-danger">New</label>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>         
+                            @else
+                            <li class="header-notification">
+                                <a href="#" class="waves-effect waves-light">
+                                    <i class="ti-bell"></i>
+                                    <span class=""></span>
+                                </a>
+                                <ul class="show-notification">
+                                    <li>
+                                    <a href="#" class="waves-effect waves-light">
+                                        <h6>Жонатилган товар йок</h6>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            @endif
                         @endif
                           <li class="user-profile header-notification">
                               <a href="#!" class="waves-effect waves-light">
@@ -254,8 +311,7 @@
                                       <a href="{{ route('profil') }}">
                                           <i class="ti-user"></i> Profile
                                       </a>
-                                  </li>
-                           
+                                  </li>                           
                                   <li class="waves-effect waves-light">
                                       <a href="/logaut">
                                           <i class="ti-layout-sidebar-left"></i> Logout
@@ -542,11 +598,11 @@
         </div>
     </div>
 
-
     <script type="text/javascript">
         function reflesh(){
             location.reload(true);
         }
+
     </script>
     <!-- Required Jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>

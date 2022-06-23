@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Adress;
 use App\Models\Arxiv;
+use App\Models\Clentmalumot;
 use App\Models\Deletkarzina;
 use App\Models\Drektor;
 use App\Models\Ichkitavar;
@@ -25,6 +26,7 @@ use App\Models\Trvarck;
 use App\Models\Trvark;
 use App\Models\Zakaz;
 use App\Models\Zakaz2;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 class KlentServis extends KlentServis2
 {
@@ -45,6 +47,18 @@ class KlentServis extends KlentServis2
         }
     }
 
+    public function storemalumot($request)
+    {
+        if($request->id){
+            return $this->updatemalumots($request);        
+        }else{
+            $data = Clentmalumot::create($request->all());
+            if($data){
+                return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $request], 200);
+            }
+        }
+    }
+    
     public function storeishchi($request)
     {
         if($request->id){
@@ -76,6 +90,13 @@ class KlentServis extends KlentServis2
         }
     }
 
+    public function updatemalumots($request)
+    {
+        Clentmalumot::find($request->id)->update($request->all());
+        $data = Clentmalumot::find($request->id);
+        return response()->json(['code'=>201, 'msg'=>'Мувофакиятли янгиланди','data' => $data], 201);
+    }
+
     public function update($request)
     {
         User::find($request->id)->update($request->all());
@@ -103,6 +124,12 @@ class KlentServis extends KlentServis2
         return response()->json(['msg'=>'Мувофакиятли очирилди']);
     }
 
+    public function deletemijoz($id)
+    {
+        Clentmalumot::find($id)->delete($id);
+        return response()->json(['msg'=>'Мувофакиятли очирилди']);
+    }
+    
     public function deleteishchi($id)
     {
         Ishchilar::find($id)->delete($id);
@@ -155,11 +182,15 @@ class KlentServis extends KlentServis2
         $adress = Adress::all();
         $tiklash = Deletkarzina::all();
         $umumiy = Umumiy::find(1);
+        $dt= Carbon::now('Asia/Tashkent');  
+        $sana = $dt->toDateString();
+        $sana2 = Clentmalumot::where('sana', $sana)->first();
         if(Session::has('IDIE')){
           $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
            $jonatilgan = Jonatilgan2::count();
           return view('tavar2',[
             'jonatilgan'=>$jonatilgan,
+             'sana2'=>$sana2,
               'brends'=>$brends,
               'ichkitavar'=>$ichkitavar,
               'data'=>$data,
@@ -407,11 +438,15 @@ class KlentServis extends KlentServis2
     public function clents()
     {
         $user = User::paginate(10);
+               $dt= Carbon::now('Asia/Tashkent');  
+        $sana = $dt->toDateString();
+        $sana2 = Clentmalumot::where('sana', $sana)->first();
         if(Session::has('IDIE')){
             $brends = Drektor::where('id','=',Session::get('IDIE'))->first();
              $jonatilgan = Jonatilgan2::count();
             return view('clent',[
                 'jonatilgan'=>$jonatilgan,
+                 'sana2'=>$sana2,
                 'brends'=>$brends,
                 'collection'=>$user,
             ]);

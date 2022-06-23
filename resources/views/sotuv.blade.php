@@ -65,8 +65,83 @@
     .tab01{
         color: #ffffff;
     }
-  
+  #postder{
+    background-color: white;
+    display: none;
+    border-radius: 12px;
+    border: 1px solid;
+    width: 99%;
+    margin: auto;
+    position: absolute;
+    z-index: 1;
+  }
 </style>
+<div id="postder">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Клиент данних</h5>
+      <svg xmlns="http://www.w3.org/2000/svg" id="Closem" width="25" height="25" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+      </svg>
+    </div>
+    <div class="modal-body">
+      <form>
+          <div class="row">
+            <div class="col-4 mb-3">
+              <label for="recipient-name" class="col-form-label">Клиент имя</label>
+              <input type="text" class="form-control" name="namese2" id="namese2">
+            </div>
+            <div class="col-4 mb-3">
+              <label for="message-text" class="col-form-label">Фамилия</label>
+              <input type="text" class="form-control" name="familiya"  id="familiya">
+            </div>
+            <div class="col-4 mb-3">
+              <label for="message-text" class="col-form-label">Дата рождения</label>
+              <input type="date" class="form-control" name="sana" id="sana">
+            </div>  
+            <div class="col-4 mb-3">
+              <label for="message-text" class="col-form-label">Тел</label>
+              <input type="text" class="form-control" name="tels"  id="tels">
+            </div>
+            <div class="col-4 mb-3">
+              <label for="message-text" class="col-form-label">Дополнительно тел</label>
+              <input type="text" class="form-control" name="tels2"  id="tels2">
+            </div>
+            <div class="col-4 mb-3">
+              <label for="message-text" class="col-form-label">Регион</label>
+              <input type="text" class="form-control" name="region"  id="region">
+            </div>
+            <div class="col-4 mb-3">
+                <label for="message-text" class="col-form-label">Адресс</label>
+                <input type="text" class="form-control" name="adress" id="adress">
+              </div>
+              <div class="col-4 mb-3">
+                <label for="message-text" class="col-form-label">Ориентир</label>
+                <input type="text" class="form-control" name="orentr" id="orentr">
+              </div>                    
+              <div class="col-4 mb-3">
+                <label for="message-text" class="col-form-label">Места работа</label>
+                <input type="text" class="form-control" name="ishjoyi" id="ishjoyi">
+              </div>  
+              <div class="col-4 mb-3">
+                <label for="message-text" class="col-form-label">Звания</label>
+                <input type="text" class="form-control" name="lavozim" id="lavozim">
+              </div>  
+              <div class="col-4 mb-3">
+                <label for="message-text" class="col-form-label">Дополнительно работа</label>
+                <input type="text" class="form-control" name="qoshimachaish" id="qoshimachaish">
+              </div>  
+              <div class="col-4 mb-3">
+                <label for="message-text" class="col-form-label">Дополнительно данних</label>
+                <input type="text" class="form-control" name="qoshimcha" id="qoshimcha">
+              </div>  
+              <div class="col-12 mb-3">
+                <label for="message-text" class="col-form-label">Дополнительно данних</label><br>
+                <textarea name="coment" class="form-control" id="coment" style="width: 100%; height: 100px;"></textarea>
+              </div>             
+          </div>
+    </div>
+  </form>
+  </div>
 <div class="page-body button-page">
         <div class="col-sm-12 card">
             <div class="row">
@@ -408,6 +483,34 @@
   </div>
 
 <script type="text/javascript">
+    function tugilgankun(id) {
+        let _url = `showklentmalumot/${id}`;    
+        $.ajax({
+        url: _url,
+        type: "GET",
+        success: function(response) {
+                $("#namese2").val(response.namese2);
+                $("#tels").val(response.tels);
+                $("#familiya").val(response.familiya);
+                $("#sana").val(response.sana);
+                $("#tels2").val(response.tels2);
+                $("#region").val(response.region);
+                $("#adress").val(response.adress);
+                $("#orentr").val(response.orentr);
+                $("#ishjoyi").val(response.ishjoyi);
+                $("#lavozim").val(response.lavozim);
+                $("#qoshimachaish").val(response.qoshimachaish);
+                $("#qoshimcha").val(response.qoshimcha);
+                $("#coment").val(response.coment);       
+                $('#postder').toggle('blind');
+            }
+        });
+    }
+
+    $( "#Closem" ).on( "click", function() {
+      $('#postder').toggle('blind');
+    });
+
   $( function() {
     $( "#tbody2" ).selectable();
   } );
