@@ -27,6 +27,8 @@ use App\Models\Trvark;
 use App\Models\Zakaz;
 use App\Models\Zakaz2;
 use Carbon\Carbon;
+use Mike42\Escpos\PrintConnectors\FilePrintConnector;
+use Mike42\Escpos\Printer;
 use Illuminate\Support\Facades\Session;
 class KlentServis extends KlentServis2
 {
@@ -1068,6 +1070,14 @@ class KlentServis extends KlentServis2
     public function respon($request, $b2)
     {
         if($request->ch == 1){
+            $connector = new FilePrintConnector("php://stdout");
+            $printer = new Printer($connector);
+            $printer -> text($request->naqt);
+            $printer -> text($request->plastik);
+            $printer -> text($request->bank);
+            $printer -> text($request->itogs);
+            $printer -> cut();
+            $printer -> close();
             return response()->json(['data'=>$b2]);
         }else{
             return response()->json(['data'=>$b2]);
