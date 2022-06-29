@@ -15,9 +15,23 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
-
+use Mike42\Escpos\PrintConnectors\FilePrintConnector;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\Printer;
 class AuthController extends Controller
 {
+
+    public function printer()
+    {
+        $connector = new WindowsPrintConnector("webeasystep");
+        // $connector = new FilePrintConnector("webeasystep");
+        $printer = new Printer($connector);
+        $printer -> text("Salom");
+        $printer -> cut();
+        $printer -> close();
+        return "Tayyor";    
+    }
+    
     public function login()
     {
       return view("auth.login");

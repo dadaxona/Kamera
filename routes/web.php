@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+
+Route::get('a', [AuthController::class,'printer']);
 Route::resource('posts', KlentController::class);
 Route::get('/', [AuthController::class,'login']);
 Route::post('login-user', [AuthController::class,'loginuser'])->name('login-user');
