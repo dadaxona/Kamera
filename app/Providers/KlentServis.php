@@ -233,7 +233,25 @@ class KlentServis extends KlentServis2
                         ->where('adress', $value["adress"])
                         ->where('tavar2_id', $value["tavar2_id"])
                         ->first();
-                Updatetavr::create([
+                $updates = Updatetavr::where('tavar_id', $value["tavar_id"])
+                        ->where('ichkitavar_id', $data->id)
+                        ->where('adress', $value["adress"])
+                        ->where('tavar2_id', $value["tavar2_id"])
+                        ->first();
+                if($updates){
+                    Updatetavr::where('tavar_id', $value["tavar_id"])
+                            ->where('ichkitavar_id', $data->id)
+                            ->where('adress', $value["adress"])
+                            ->where('tavar2_id', $value["tavar2_id"])
+                            ->update([
+                                'raqam'=>$value["raqam"],
+                                'hajm'=>$value["hajm"],
+                                'summa'=>$value["summa"],
+                                'summa2'=>$value["summa2"],
+                                'summa3'=>$value["summa3"],
+                            ]);
+                }else{
+                    Updatetavr::create([
                         'tavar_id'=>$value["tavar_id"],
                         'ichkitavar_id'=>$data->id,
                         'adress'=>$value["adress"],
@@ -244,6 +262,7 @@ class KlentServis extends KlentServis2
                         'summa2'=>$value["summa2"],
                         'summa3'=>$value["summa3"],
                     ]);
+                }
                 Trvark::create([
                         'tavar_id'=>$value["tavar_id"],
                         'adress'=>$value["adress"],
@@ -268,17 +287,36 @@ class KlentServis extends KlentServis2
                     'summa2'=>$value["summa2"],
                     'summa3'=>$value["summa3"],
                 ]);
-                Updatetavr::create([
-                    'tavar_id'=>$value["tavar_id"],
-                    'ichkitavar_id'=>$data->id,
-                    'adress'=>$value["adress"],
-                    'tavar2_id'=>$value["tavar2_id"],
-                    'raqam'=>$value["raqam"],
-                    'hajm'=>$value["hajm"],
-                    'summa'=>$value["summa"],
-                    'summa2'=>$value["summa2"],
-                    'summa3'=>$value["summa3"],
-                ]);
+                $updates = Updatetavr::where('tavar_id', $value["tavar_id"])
+                            ->where('ichkitavar_id', $data->id)
+                            ->where('adress', $value["adress"])
+                            ->where('tavar2_id', $value["tavar2_id"])
+                            ->first();
+                if($updates){
+                    Updatetavr::where('tavar_id', $value["tavar_id"])
+                            ->where('ichkitavar_id', $data->id)
+                            ->where('adress', $value["adress"])
+                            ->where('tavar2_id', $value["tavar2_id"])
+                            ->update([
+                                'raqam'=>$value["raqam"],
+                                'hajm'=>$value["hajm"],
+                                'summa'=>$value["summa"],
+                                'summa2'=>$value["summa2"],
+                                'summa3'=>$value["summa3"],
+                            ]);
+                }else{
+                    Updatetavr::create([
+                        'tavar_id'=>$value["tavar_id"],
+                        'ichkitavar_id'=>$data->id,
+                        'adress'=>$value["adress"],
+                        'tavar2_id'=>$value["tavar2_id"],
+                        'raqam'=>$value["raqam"],
+                        'hajm'=>$value["hajm"],
+                        'summa'=>$value["summa"],
+                        'summa2'=>$value["summa2"],
+                        'summa3'=>$value["summa3"],
+                    ]);
+                }
                 Trvark::create([
                     'tavar_id'=>$value["tavar_id"],
                     'adress'=>$value["adress"],
