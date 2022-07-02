@@ -68,28 +68,7 @@ class AuthController extends Controller
                     }
                 }
             
-                }elseif($request->login == "Bugalter"){
-                    $user = Drektor::where('login','=',$request['login'])->first();
-                if($user){
-                if($request->password == $user->password){        
-                        $request->session()->put('IDIE',$user->id);
-                        return response()->json(["data"=>200]);
-                    }else{
-                    return response()->json(["data"=>404]);
-                }
                 }else{
-                $request->validate([
-                    'login'=>'required',
-                    'password'=>'required',
-                ]);  
-                Drektor::create($request->all());
-                $user = Drektor::where('login','=',$request['login'])->first();
-                if ($user) {         
-                    $request->session()->put('IDIE',$user->id);
-                    return response()->json(["data"=>200]);
-                }
-                }
-            }else{
                 return response()->json(["data"=>500]);
             }
         }else{            
