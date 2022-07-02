@@ -171,6 +171,13 @@ class KlentServis extends KlentServis2
 
     public function update2($request)
     {
+        Tavar2::find($request->id)->update($request->all());
+        $data = Tavar2::find($request->id);
+        return response()->json(['code'=>200, 'msg'=>'Мувофакиятли янгиланди','data' => $data], 200);
+    }
+
+    public function updateer2($request)
+    {
         Tavar::find($request->id)->update($request->all());
         $data = Tavar::find($request->id);
         return response()->json(['code'=>200, 'msg'=>'Мувофакиятли янгиланди','data' => $data], 200);

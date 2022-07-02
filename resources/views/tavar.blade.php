@@ -70,7 +70,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="userForm3" action="{{ route('update2') }}" method="POST">
+        <form id="userForm3" action="{{ route('updateer2') }}" method="POST">
             @csrf
             <input type="hidden" name="id" id="id2">
             <input type="text" name="name" class="form-control" id="name2">
@@ -153,7 +153,7 @@ $( function() {
     });
   
   function editPost2(id) {
-    let _url = `show2/${id}`;
+    let _url = `shower2/${id}`;
     $('#idError').text('');
     $('#nameError').text('');
     
@@ -264,7 +264,7 @@ $( function() {
 
        $('#dele').on('click', function(){
         var id = $("#id4").val();
-        let _url = `delete2/${id}`;
+        let _url = `deleteer2/${id}`;
         let _token   = $('meta[name="csrf-token"]').attr('content');    
         $.ajax({
           url: _url,

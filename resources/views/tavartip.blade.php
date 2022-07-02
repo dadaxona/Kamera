@@ -74,8 +74,15 @@
         <form id="userForm3" action="{{ route('update2') }}" method="POST">
             @csrf
             <input type="hidden" name="id" id="id2">
-            <input type="text" name="name" class="form-control" id="name2">
-            <span class="text-danger error-text name_error"></span>      
+            <label for="">Тип</label>
+            <select name="tavar_id" id="" class="form-control">
+              <option value="">--Выбират--</option>
+              @foreach ($tovar as $item)
+              <option value="{{ $item->id }}">{{ $item->name }}</option>
+              @endforeach
+            </select>
+            <label for="" class="mt-2">Товар имя</label>
+            <input type="text" name="name" class="form-control" id="name2">     
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Назад</button>

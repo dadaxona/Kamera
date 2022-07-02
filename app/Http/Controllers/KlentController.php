@@ -604,10 +604,16 @@ class KlentController extends KlentController2
 
     public function show2($id)
     {
-        $post = Tavar::find($id);    
+        $post = Tavar2::find($id);    
         return response()->json($post);
     }
 
+    public function shower2($id)
+    {
+        $post = Tavar::find($id);    
+        return response()->json($post);
+    }
+    
     public function edit3(KlentServis $model)
     {
         return $model->edit3();
@@ -624,8 +630,26 @@ class KlentController extends KlentController2
             return response()->json(['code'=>0, 'msg'=>'Малумот киритилмади', 'error'=>$validator->errors()->toArray()]);
         }
     }
-
+    
+    public function updateer2(Request $request, KlentServis $model)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+        if($validator->passes()){
+            return $model->updateer2($request);
+        }else{            
+            return response()->json(['code'=>0, 'msg'=>'Малумот киритилмади', 'error'=>$validator->errors()->toArray()]);
+        }
+    }
+    
     public function delete2($id)
+    {
+        Tavar2::find($id)->delete($id);
+        return response()->json(['msg'=>'Мувофакиятли очирилди']);
+    }
+    
+    public function deleteer2($id)
     {
         Tavar::find($id)->delete($id);
         return response()->json(['msg'=>'Мувофакиятли очирилди']);
