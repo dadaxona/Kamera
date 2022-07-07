@@ -663,9 +663,9 @@ class KlentController extends KlentController2
             'addmore.*.tavar2_id' => 'required',
             'addmore.*.raqam' => 'nullable',
             'addmore.*.hajm' => 'required',
-            'addmore.*.summa' => 'required',
-            'addmore.*.summa2' => 'required',
-            'addmore.*.summa3' => 'required',
+            'addmore.*.summa' => 'required|numeric',
+            'addmore.*.summa2' => 'required|numeric',
+            'addmore.*.summa3' => 'required|numeric',
         ]);
         if($validator->passes()){
             return $model->store3($request);
@@ -682,9 +682,9 @@ class KlentController extends KlentController2
             'tavar2_id' => 'required',
             'raqam' => 'nullable',
             'hajm' => 'required',
-            'summa' => 'required',
-            'summa2' => 'required',
-            'summa3' => 'required',
+            'summa' => 'required|numeric',
+            'summa2' => 'required|numeric',
+            'summa3' => 'required|numeric',
         ]);
         if($validator->passes()){
             return $model->updates($request);
