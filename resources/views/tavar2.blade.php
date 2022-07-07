@@ -548,17 +548,17 @@
               </div>
               <div class="mb-3">
                 <label for="message-text" class="col-form-label">Закупочная цена</label>
-                <input type="number" class="form-control" name="summa" id="summa12">
+                <input type="text" class="form-control" name="summa" id="summa12">
                 <span class="text-danger error-text summa_error"></span>
               </div> 
               <div class="mb-3">
                 <label for="message-text" class="col-form-label">Оптовая цена</label>
-                <input type="number" class="form-control" name="summa2" id="summa22">
+                <input type="text" class="form-control" name="summa2" id="summa22">
                 <span class="text-danger error-text summa2_error"></span>
               </div>
               <div class="mb-3">
                 <label for="message-text" class="col-form-label">Розничная цена</label>
-                <input type="number" class="form-control" name="summa3" id="summa223">
+                <input type="text" class="form-control" name="summa3" id="summa223">
                 <span class="text-danger error-text summa3_error"></span>
               </div>
         </div>
@@ -591,7 +591,7 @@ $( function() {
     var i = 0;
     $("#add").click(function(){            
             ++i;
-        $("#dynamicTable tbody").append('<tr><td><select name="addmore['+i+'][tavar_id]" id="" class="form-control mx-2">@foreach ($data as $item)<option value="{{ $item->id }}">{{ $item->name }}</option>@endforeach</select></td><td><select name="addmore['+i+'][adress]" id="" class="form-control mx-2">@foreach ($adress as $item)<option value="{{ $item->adress }}">{{ $item->adress }}</option>@endforeach</select></td><td><select name="addmore['+i+'][tavar2_id]" id="" class="form-control mx-2">@foreach ($datatip as $item)<option value="{{ $item->id }}">{{ $item->name }}</option>@endforeach</select></td><td><input type="number" name="addmore['+i+'][raqam]" id="" class="form-control mx-2" placeholder="Предупрежденние"></td><td><input type="number" name="addmore['+i+'][hajm]" id="" class="form-control mx-2" placeholder="Шт"></td><td><input type="number" name="addmore['+i+'][summa]" id="" class="form-control mx-2" placeholder="Закупочная цена"></td><td><input type="number" name="addmore['+i+'][summa2]" id="" class="form-control mx-2" placeholder="Оптовая цена"><td><input type="number" name="addmore['+i+'][summa3]" id="" class="form-control mx-2" placeholder="Розничная цена"></td><td><button type="button" class="btn btn-danger remove-tr">Удалить</button></td></tr>');
+        $("#dynamicTable tbody").append('<tr><td><select name="addmore['+i+'][tavar_id]" id="" class="form-control mx-2">@foreach ($data as $item)<option value="{{ $item->id }}">{{ $item->name }}</option>@endforeach</select></td><td><select name="addmore['+i+'][adress]" id="" class="form-control mx-2">@foreach ($adress as $item)<option value="{{ $item->adress }}">{{ $item->adress }}</option>@endforeach</select></td><td><select name="addmore['+i+'][tavar2_id]" id="" class="form-control mx-2">@foreach ($datatip as $item)<option value="{{ $item->id }}">{{ $item->name }}</option>@endforeach</select></td><td><input type="number" name="addmore['+i+'][raqam]" id="" class="form-control mx-2" placeholder="Предупрежденние"></td><td><input type="number" name="addmore['+i+'][hajm]" id="" class="form-control mx-2" placeholder="Шт"></td><td><input type="text" name="addmore['+i+'][summa]" id="" class="form-control mx-2" placeholder="Закупочная цена"></td><td><input type="text" name="addmore['+i+'][summa2]" id="" class="form-control mx-2" placeholder="Оптовая цена"><td><input type="text" name="addmore['+i+'][summa3]" id="" class="form-control mx-2" placeholder="Розничная цена"></td><td><button type="button" class="btn btn-danger remove-tr">Удалить</button></td></tr>');
     }); 
   
     $(document).on('click', '.remove-tr', function(){
