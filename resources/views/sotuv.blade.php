@@ -205,7 +205,7 @@
         </div>
         <div class="card col-2">
             @if ($itogs)
-                <label for="message-text" class="col-form-label m-0 text-right">Итого</label>
+                <label for="message-text" class="col-form-label m-0 text-right">Итого: <span id="kkkkkk"></span></label>
                 <input type="text" name="id" id="itog" class="form-control text-right" disabled value="{{ $itogs->itogo }}">
                 <label for="message-text" class="col-form-label m-0 text-right">Курс</label>
                 <input type="text" id="kurs" class="form-control text-right" disabled value="{{ $itogs->kurs }}">
@@ -215,7 +215,7 @@
                       </svg>
                 </button>
             @else
-                <label for="message-text" class="col-form-label m-0 text-right">Итого</label>
+                <label for="message-text" class="col-form-label m-0 text-right">Итого: <span id="kkkkkk"></span></label>
                 <input type="text" id="itog2" class="form-control text-right" disabled value="0">
                 <label for="message-text" class="col-form-label m-0 text-right">Курс</label>
                 <input type="text" id="kurs2" class="form-control text-right" disabled>
@@ -831,6 +831,11 @@ function kursm(){
                     success: function(data) {                    
                         $("#itog2").val(data.data.itogo);
                         $("#itog").val(data.data.itogo);
+                        if(data.data.usd == 1){
+                            $("#kkkkkk").html("USD");
+                        }else{
+                            $("#kkkkkk").html("UZS");
+                        }
                         fetch_customer_data();
                         fetch_customer_data2();
                     }
