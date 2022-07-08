@@ -432,6 +432,17 @@ class KlentServis extends KlentServis2
             'summa2'=>$data->summa2,
             'summa3'=>$data->summa3
         ]);
+        Trvark::create([
+            'tavar_id'=>$data->tavar_id,
+            'adress'=>$data->adress,
+            'tavar2_id'=>$data->tavar2_id,
+            'ichkitavar_id'=>$a->id,
+            'raqam'=>$data->raqam,
+            'hajm'=>$data->hajm,
+            'summa'=>$data->summa,
+            'summa2'=>$data->summa2,
+            'summa3'=>$data->summa3,
+        ]);
         Deletkarzina::find($id)->delete($id);
         return response()->json(['msg'=>'Мувофакиятли тикланди']);
     }
