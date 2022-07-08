@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('dataps', function (Blueprint $table) {
             $table->id();
-            $table->integer('tavarshtuk')->nullable();
-            $table->integer('shtuk')->nullable();
-            $table->integer('foiz')->nullable();
-            $table->integer('dateitog')->nullable();
-            $table->integer('opshi')->nullable();
+            $table->string('tavarshtuk')->nullable();
+            $table->string('shtuk')->nullable();
+            $table->string('foiz')->nullable();
+            $table->string('dateitog')->nullable();
+            $table->string('opshi')->nullable();
             $table->timestamps();
         });
     }

@@ -21,10 +21,10 @@ return new class extends Migration
             $table->bigInteger('ichkitavar_id')->unsigned();
             $table->string('name')->nullable();
             $table->string('raqam')->nullable();
-            $table->integer('hajm')->nullable();
-            $table->integer('summa')->nullable();
-            $table->integer('summa2')->nullable();
-            $table->integer('summa3')->nullable();
+            $table->string('hajm')->nullable();
+            $table->string('summa')->nullable();
+            $table->string('summa2')->nullable();
+            $table->string('summa3')->nullable();
             $table->timestamps();
             $table->foreign('tavar_id')->references('id')->on('tavars')
             ->onDelete('cascade')->onUpdate('cascade');

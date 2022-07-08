@@ -21,10 +21,10 @@ return new class extends Migration
             $table->bigInteger('tayyorsqlad_id')->unsigned();
             $table->string('name')->nullable();
             $table->string('raqam')->nullable();
-            $table->integer('hajm')->nullable();
-            $table->integer('summa')->nullable();
-            $table->integer('summa2')->nullable();
-            $table->integer('summa3')->nullable();
+            $table->string('hajm')->nullable();
+            $table->string('summa')->nullable();
+            $table->string('summa2')->nullable();
+            $table->string('summa3')->nullable();
             $table->timestamps();
             $table->foreign('tavarp_id')->references('id')->on('tavarps')
             ->onDelete('cascade')->onUpdate('cascade');

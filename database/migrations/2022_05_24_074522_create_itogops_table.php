@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('itogops', function (Blueprint $table) {
             $table->id();
-            $table->integer('itogo')->nullable();
-            $table->integer('kurs')->nullable();
-            $table->integer('usd')->nullable();
+            $table->string('itogo')->nullable();
+            $table->string('kurs')->nullable();
+            $table->string('usd')->nullable();
             $table->timestamps();
         });
     }

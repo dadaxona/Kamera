@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('naqt')->nullable();
             $table->string('plastik')->nullable();
             $table->string('bank')->nullable();
-            $table->integer('karzs')->nullable();
+            $table->string('karzs')->nullable();
             $table->timestamps();
             $table->foreign('userp_id')->references('id')->on('userps')
             ->onDelete('cascade')->onUpdate('cascade');

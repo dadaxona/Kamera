@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('clentitogs', function (Blueprint $table) {
             $table->id();
-            $table->integer('tavarshtuk')->nullable();
-            $table->integer('shtuk')->nullable();
-            $table->integer('foiz')->nullable();
-            $table->integer('itog')->nullable();
-            $table->integer('opshi')->nullable();
+            $table->string('tavarshtuk')->nullable();
+            $table->string('shtuk')->nullable();
+            $table->string('foiz')->nullable();
+            $table->string('itog')->nullable();
+            $table->string('opshi')->nullable();
             $table->timestamps();
         });
     }
