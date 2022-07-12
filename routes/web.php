@@ -19,12 +19,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('a', [AuthController::class,'printer']);
 Route::resource('posts', KlentController::class);
-Route::get('/', [AuthController::class,'login']);
 Route::post('login-user', [AuthController::class,'loginuser'])->name('login-user');
-Route::get('/glavninachal', [AuthController::class,'dashbord'])->middleware('isLog');
 Route::get('/logaut', [AuthController::class,'logaut']);
 Route::get('/profil', [AuthController::class,'profil'])->name('profil');
 Route::get('/setting', [AuthController::class,'setting'])->name('setting');
+
+Route::group(['middleware'=>['isLog']], function (){
+    Route::get('/', [AuthController::class,'login']);
+    Route::get('/glavninachal', [AuthController::class,'dashbord']);
+});
 
 Route::get('tavar_live', [KlentController::class, 'tavar_live'])->name('tavar_live');
 Route::get('tavar2_live', [KlentController::class, 'tavar2_live'])->name('tavar2_live');
