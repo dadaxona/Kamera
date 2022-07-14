@@ -1124,12 +1124,16 @@ function kursm(){
                         _token: _token
                     },
                     success: function(data) {
-                        $('#tbody').prepend('<tr onclick="belgilash('+data.data.id+')" style="border-bottom: 1px solid;" id="selectablesdasd"><td>'+data.data.name+'</td><td>'+data.data.summa2+'</td><td>'+data.data.soni+'</td><td>'+data.data.chegirma+'</td><td>'+data.data.itog+'</td><td>'+data.data.hajm+'</td></tr>');
-                        $("#itog").val(data.data2.itogo);
-                        $("#itog2").val(data.data2.itogo);
-                        $("#kurs").val(data.data2.kurs);
-                        $("#kurs2").val(data.data2.kurs);
-                        toastr.success(data.msg).fadeOut(1500);
+                        if(data.code == 0){
+                            toastr.error(data.msg).fadeOut(2500);
+                        }else{
+                            $('#tbody').prepend('<tr onclick="belgilash('+data.data.id+')" style="border-bottom: 1px solid;" id="selectablesdasd"><td>'+data.data.name+'</td><td>'+data.data.summa2+'</td><td>'+data.data.soni+'</td><td>'+data.data.chegirma+'</td><td>'+data.data.itog+'</td><td>'+data.data.hajm+'</td></tr>');
+                            $("#itog").val(data.data2.itogo);
+                            $("#itog2").val(data.data2.itogo);
+                            $("#kurs").val(data.data2.kurs);
+                            $("#kurs2").val(data.data2.kurs);
+                            toastr.success(data.msg).fadeOut(1500);
+                        }
                     }
                 });
             }else{
