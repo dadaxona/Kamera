@@ -24,6 +24,7 @@ use App\Models\Jonatilgan2;
 use App\Models\Sqladpoytaxt;
 use App\Models\Tavar2;
 use App\Models\Tayyorsqlad;
+use App\Models\Updatetavrp;
 
 class KlentController extends KlentController2
 {
@@ -695,7 +696,7 @@ class KlentController extends KlentController2
 
     public function edit4(Request $request)
     {
-        $post = Updatetavr::where('ichkitavar_id', $request->id)->first();    
+        $post = Updatetavrp::where('tayyorsqlad_id', $request->id)->first();    
         return response()->json($post);
     }
 
