@@ -945,6 +945,17 @@ class KlentController extends KlentController2
         echo json_encode($data);
         }
     }
+    
+    public function rum()
+    {
+        $data = Tavar2::all();
+        return response()->json($data);        
+    }
+    public function rum2(Request $request)
+    {
+        $data = Tavar2::where('tavar_id', $request->id)->get();
+        return response()->json($data);        
+    }
 
     function sqladiskizapas(Request $request)
     {

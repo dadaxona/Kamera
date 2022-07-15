@@ -88,6 +88,8 @@ Route::get('belgi2', [KlentController::class, 'belgi2'])->name('belgi2');
 Route::get('usdkurd2', [KlentController::class, 'usdkurd2'])->name('usdkurd2');
 Route::get('/sotuv',[KlentController::class, 'sotuv'])->name('sotuv');
 Route::get('/live_search',[KlentController::class, 'live_search'])->name('live_search');
+Route::get('/rum',[KlentController::class, 'rum'])->name('rum');
+Route::get('/rum2',[KlentController::class, 'rum2'])->name('rum2');
 Route::get('/sqladiskizapas',[KlentController::class, 'sqladiskizapas'])->name('sqladiskizapas');
 Route::get('/sqladiskizapas2',[KlentController::class, 'sqladiskizapas2'])->name('sqladiskizapas2');
 Route::get('/tbody3table',[KlentController::class, 'tbody3table'])->name('tbody3table');

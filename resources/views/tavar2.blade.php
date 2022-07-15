@@ -508,17 +508,17 @@
               <input type="hidden" name="id" id="ichki_id">
               <div class="mb-3">
                 <label for="recipient-name" class="col-form-label">Тип</label>
-                  <select name="tavar_id" class="form-control">
+                  <select name="tavar_id" class="form-control" id="tavar_id2">
                     <option value="">--Танланг--</option>
                     @foreach($data as $item)
                       <option value="{{ $item->id }}">{{ $item->name }}</option>                                
                     @endforeach
                   </select>
                 <span class="text-danger error-text tavar_id_error"></span>
-              </div>
+              </div>     
               <div class="mb-3">
                 <label for="recipient-name" class="col-form-label">Етказиб берувчи</label>
-                  <select name="adress" class="form-control">
+                  <select name="adress" class="form-control" id="adress2">
                     <option value="">--Танланг--</option>
                     @foreach($adress as $item)
                       <option value="{{ $item->adress }}">{{ $item->adress }}</option>                                
@@ -528,11 +528,11 @@
               </div>
               <div class="mb-3">
                 <label for="recipient-name" class="col-form-label">Тавар номи</label>
-                  <select name="tavar2_id" class="form-control">
-                    <option value="">--Танланг--</option>
+                  <select name="tavar2_id" class="form-control" id="tavar2_id2">
+                    {{-- <option value="">--Танланг--</option>
                     @foreach($datatip as $item)
                       <option value="{{ $item->id }}">{{ $item->name }}</option>                                
-                    @endforeach
+                    @endforeach  --}}
                   </select>
                 <span class="text-danger error-text adress_error"></span>
               </div>
@@ -591,12 +591,51 @@ $( function() {
     var i = 0;
     $("#add").click(function(){            
             ++i;
-        $("#dynamicTable tbody").append('<tr><td><select name="addmore['+i+'][tavar_id]" id="" class="form-control mx-2">@foreach ($data as $item)<option value="{{ $item->id }}">{{ $item->name }}</option>@endforeach</select></td><td><select name="addmore['+i+'][adress]" id="" class="form-control mx-2">@foreach ($adress as $item)<option value="{{ $item->adress }}">{{ $item->adress }}</option>@endforeach</select></td><td><select name="addmore['+i+'][tavar2_id]" id="" class="form-control mx-2">@foreach ($datatip as $item)<option value="{{ $item->id }}">{{ $item->name }}</option>@endforeach</select></td><td><input type="number" name="addmore['+i+'][raqam]" id="" class="form-control mx-2" placeholder="Предупрежденние"></td><td><input type="number" name="addmore['+i+'][hajm]" id="" class="form-control mx-2" placeholder="Шт"></td><td><input type="text" name="addmore['+i+'][summa]" id="" class="form-control mx-2" placeholder="Закупочная цена"></td><td><input type="text" name="addmore['+i+'][summa2]" id="" class="form-control mx-2" placeholder="Оптовая цена"><td><input type="text" name="addmore['+i+'][summa3]" id="" class="form-control mx-2" placeholder="Розничная цена"></td><td><button type="button" class="btn btn-danger remove-tr">Удалить</button></td></tr>');
+        $("#dynamicTable tbody").append('<tr><td><select name="addmore['+i+'][tavar_id]" class="form-control mx-2">@foreach ($data as $item)<option value="{{ $item->id }}">{{ $item->name }}</option>@endforeach</select></td><td><select name="addmore['+i+'][adress]" id="" class="form-control mx-2">@foreach ($adress as $item)<option value="{{ $item->adress }}">{{ $item->adress }}</option>@endforeach</select></td><td><select name="addmore['+i+'][tavar2_id]" id="" class="form-control mx-2">@foreach ($datatip as $item)<option value="{{ $item->id }}">{{ $item->name }}</option>@endforeach</select></td><td><input type="text" name="addmore['+i+'][raqam]" id="addmore" class="form-control mx-2" placeholder="Предупрежденние"></td><td><input type="number" name="addmore['+i+'][hajm]" id="" class="form-control mx-2" placeholder="Шт"></td><td><input type="text" name="addmore['+i+'][summa]" id="" class="form-control mx-2" placeholder="Закупочная цена"></td><td><input type="text" name="addmore['+i+'][summa2]" id="" class="form-control mx-2" placeholder="Оптовая цена"><td><input type="text" name="addmore['+i+'][summa3]" id="" class="form-control mx-2" placeholder="Розничная цена"></td><td><button type="button" class="btn btn-danger remove-tr">Удалить</button></td></tr>');
     }); 
   
     $(document).on('click', '.remove-tr', function(){
         $(this).parents('tr').remove();
         --i;               
+    });
+
+    function rum(query = '')
+    {
+      $.ajax({
+        url:"{{ route('rum') }}",
+        method:'GET',
+        success:function(data)
+        {
+          let rows =  '';
+          data.forEach(room => {
+            rows += `
+            <option value="${room.id}">${room.name}</option>`;
+          });
+          $('#tavar2_id2').html(rows);
+        }
+      });
+    }
+    rum();
+
+    $("#tavar_id2").on("change", function(){
+      var id = $(this).val();
+      $.ajax({
+        url:"{{ route('rum2') }}",
+        method:'GET',
+        data:{
+          id: id
+        },
+        dataType:'json',
+        success:function(data)
+        {
+          let rows =  '';
+          data.forEach(room => {
+            rows += `
+            <option value="${room.id}">${room.name}</option>`;
+          });
+          $('#tavar2_id2').html(rows);
+        }
+      });
     });
 
     $( "#addPost3" ).on( "click", function() {
@@ -821,23 +860,23 @@ $( function() {
       $(document).on('click', "#data", function(){
         var id = $(this).data("id");
         $.ajax({
-              url:"{{ route('tavar') }}",
-              method:'GET',
-              data:{
-                id: id
-              },
-              dataType:'json',
-              success:function(data)
-              {
-                $('#tavarlar').html(data.output);
-                fetch_customer_data();
-                fetch_customer_data2(data);
-                var foo =100 * data.foo2.dateitog / data.foo2.opshi;
-                $("#tavarshtuk").val(data.foo2.tavarshtuk);
-                $("#shtuk").val(data.foo2.shtuk);
-                $("#foiz").val(foo);
-                $("#dateitog").val(data.foo2.dateitog);
-              }
+            url:"{{ route('tavar') }}",
+            method:'GET',
+            data:{
+              id: id
+            },
+            dataType:'json',
+            success:function(data)
+            {
+              $('#tavarlar').html(data.output);
+              fetch_customer_data();
+              fetch_customer_data2(data);
+              var foo =100 * data.foo2.dateitog / data.foo2.opshi;
+              $("#tavarshtuk").val(data.foo2.tavarshtuk);
+              $("#shtuk").val(data.foo2.shtuk);
+              $("#foiz").val(foo);
+              $("#dateitog").val(data.foo2.dateitog);
+            }
           });
         });
 
@@ -867,32 +906,32 @@ $( function() {
             });
         });
 
-        $(document).on('change', "#date2", function(e) {
-          e.preventDefault();
-          let _token  = $('meta[name="csrf-token"]').attr('content');
-          var date = $("#date").val();
-          var date2 = $("#date2").val();
-            $.ajax({
-              url: "{{ route('search') }}",
-              method: "POST",
-              data:{
-                date: date,
-                date2: date2,              
-                _token: _token
-              },
-              dataType:'json',
-              success:function(data){
-                $('#tavarlar').html(data.output);
-                fetch_customer_data();
-                var foo =100 * data.foo2.dateitog / data.foo2.opshi;
-                $("#tavarshtuk").val(data.foo2.tavarshtuk);
-                $("#shtuk").val(data.foo2.shtuk);
-                $("#foiz").val(foo);
-                $("#dateitog").val(data.foo2.dateitog);
-              }
-            });
-        });
+  $(document).on('change', "#date2", function(e) {
+    e.preventDefault();
+    let _token  = $('meta[name="csrf-token"]').attr('content');
+    var date = $("#date").val();
+    var date2 = $("#date2").val();
+      $.ajax({
+        url: "{{ route('search') }}",
+        method: "POST",
+        data:{
+          date: date,
+          date2: date2,              
+          _token: _token
+        },
+        dataType:'json',
+        success:function(data){
+          $('#tavarlar').html(data.output);
+          fetch_customer_data();
+          var foo =100 * data.foo2.dateitog / data.foo2.opshi;
+          $("#tavarshtuk").val(data.foo2.tavarshtuk);
+          $("#shtuk").val(data.foo2.shtuk);
+          $("#foiz").val(foo);
+          $("#dateitog").val(data.foo2.dateitog);
+        }
+      });
     });
+  });
 
   function editPost3(id) {
     $.ajax({
@@ -902,13 +941,16 @@ $( function() {
         id: id
       },
       success: function(response) {
-          $("#ichki_id").val(response.ichkitavar_id);
-          $("#raqam2").val(response.raqam);
-          $("#hajm2").val(response.hajm);
-          $("#summa12").val(response.summa);
-          $("#summa22").val(response.summa2);
-          $("#summa223").val(response.summa3);
-          $('#updates2').modal('show');
+        $("#ichki_id").val(response.ichkitavar_id);
+        $("#tavar_id2").val(response.tavar_id);
+        $("#adress2").val(response.adress);
+        $("#tavar2_id2").val(response.tavar2_id);
+        $("#raqam2").val(response.raqam);
+        $("#hajm2").val(response.hajm);
+        $("#summa12").val(response.summa);
+        $("#summa22").val(response.summa2);
+        $("#summa223").val(response.summa3);
+        $('#updates2').modal('show');
       }
     });
   }
