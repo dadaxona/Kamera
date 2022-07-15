@@ -599,7 +599,7 @@ $( function() {
         --i;               
     });
 
-    function rum(query = '')
+    function rum()
     {
       $.ajax({
         url:"{{ route('rum') }}",

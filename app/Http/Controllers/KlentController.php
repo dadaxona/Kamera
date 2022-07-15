@@ -696,7 +696,7 @@ class KlentController extends KlentController2
 
     public function edit4(Request $request)
     {
-        $post = Updatetavrp::where('tayyorsqlad_id', $request->id)->first();    
+        $post = Updatetavr::where('ichkitavar_id', $request->id)->first();    
         return response()->json($post);
     }
 
