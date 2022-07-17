@@ -603,9 +603,9 @@ class KlentController extends KlentController2
         }
     }
 
-    public function show2($id)
+    public function show2(Request $request)
     {
-        $post = Tavar2::find($id);    
+        $post = Tavar2::find($request->id);
         return response()->json($post);
     }
 

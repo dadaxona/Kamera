@@ -75,7 +75,7 @@
             @csrf
             <input type="hidden" name="id" id="id2">
             <label for="">Тип</label>
-            <select name="tavar_id" id="" class="form-control">
+            <select name="tavar_id" class="form-control" id="tavar_id">
               <option value="">--Выбират--</option>
               @foreach ($tovar as $item)
               <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -138,17 +138,17 @@ $( function() {
       $('#post-modal2').modal('show');
     }
   
-  function editPost2(id) {
-    let _url = `show2/${id}`;
-    $('#idError').text('');
-    $('#nameError').text('');
-    
+  function editPost2(id) {   
     $.ajax({
-      url: _url,
+      url: "{{ route('show2') }}",
       type: "GET",
+      data:{
+        id: id
+      },
       success: function(response) {
           if(response) {
             $("#id2").val(response.id);
+            $("#tavar_id").val(response.tavar_id);
             $("#name2").val(response.name);
             $('#post-modal3').modal('show');
           }

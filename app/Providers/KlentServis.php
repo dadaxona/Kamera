@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Adress;
+use App\Models\Adressp;
 use App\Models\Arxiv;
 use App\Models\Clentmalumot;
 use App\Models\Deletkarzina;
@@ -27,6 +28,7 @@ use App\Models\Trvark;
 use App\Models\Zakaz;
 use App\Models\Zakaz2;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Mike42\Escpos\PrintConnectors\FilePrintConnector;
 use Mike42\Escpos\Printer;
 use Illuminate\Support\Facades\Session;
@@ -170,7 +172,10 @@ class KlentServis extends KlentServis2
     public function update2($request)
     {
         Tavar2::find($request->id)->update($request->all());
-        Tavar2p::find($request->id)->update($request->all());
+        Tavar2p::find($request->id)->update([
+            'tavarp_id'=>$request->tavar_id,
+            'name'=>$request->name,
+        ]);
         $data = Tavar2::find($request->id);
         return response()->json(['code'=>200, 'msg'=>'Мувофакиятли янгиланди','data' => $data], 200);
     }
@@ -474,15 +479,17 @@ class KlentServis extends KlentServis2
     {
         foreach ($request->addmore as $value) {
             $data = Adress::create($value);
+            DB::table('adresseps')->insert($value);
         }
-        if($data){
-            return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $data], 200);
-        }
+        return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $data], 200);
+        
     }
 
     public function pastavkaupdate($request)
     {
+        unset($request["_token"]);
         Adress::find($request->id)->update($request->all());
+        DB::table('adresseps')->where('id', $request->id)->update($request->all());       
         $data = Adress::find($request->id);
         return response()->json(['code'=>201, 'msg'=>'Мувофакиятли янгиланди','data' => $data], 201);
     }
@@ -490,13 +497,14 @@ class KlentServis extends KlentServis2
     public function deletew4($id)
     {
         Adress::find($id)->delete($id);
+        DB::table('adresseps')->where('id' ,$id)->delete($id);
         return response()->json(['msg'=>'Мувофакиятли очирилди']);
     }
 
     public function clents()
     {
         $user = User::paginate(10);
-               $dt= Carbon::now('Asia/Tashkent');  
+        $dt= Carbon::now('Asia/Tashkent');  
         $sana = $dt->toDateString();
         $sana2 = Clentmalumot::where('sana', $sana)->first();
         if(Session::has('IDIE')){
