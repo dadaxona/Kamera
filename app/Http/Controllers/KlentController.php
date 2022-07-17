@@ -23,6 +23,8 @@ use App\Models\Ishchilar;
 use App\Models\Jonatilgan2;
 use App\Models\Sqladpoytaxt;
 use App\Models\Tavar2;
+use App\Models\Tavar2p;
+use App\Models\Tavarp;
 use App\Models\Tayyorsqlad;
 use App\Models\Updatetavrp;
 
@@ -647,12 +649,14 @@ class KlentController extends KlentController2
     public function delete2($id)
     {
         Tavar2::find($id)->delete($id);
+        Tavar2p::find($id)->delete($id);
         return response()->json(['msg'=>'Мувофакиятли очирилди']);
     }
     
     public function deleteer2($id)
     {
         Tavar::find($id)->delete($id);
+        Tavarp::find($id)->delete($id);
         return response()->json(['msg'=>'Мувофакиятли очирилди']);
     }
 
