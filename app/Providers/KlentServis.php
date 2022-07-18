@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Adress;
+use App\Models\Adressp;
 use App\Models\Arxiv;
 use App\Models\Clentmalumot;
 use App\Models\Deletkarzina;
@@ -27,6 +28,7 @@ use App\Models\Trvark;
 use App\Models\Zakaz;
 use App\Models\Zakaz2;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Mike42\Escpos\PrintConnectors\FilePrintConnector;
 use Mike42\Escpos\Printer;
 use Illuminate\Support\Facades\Session;
@@ -150,9 +152,8 @@ class KlentServis extends KlentServis2
             $data = Tavar::create($value);
             Tavarp::create($value);
         }
-        if($data){
-            return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $data], 200);
-        }
+        return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $data], 200);
+        
     }
 
     public function store2tip($request)
@@ -164,14 +165,17 @@ class KlentServis extends KlentServis2
                 'name'=>$value["name"],
             ]);
         }
-        if($data){
-            return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $data], 200);
-        }
+        return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $data], 200);
+        
     }
 
     public function update2($request)
     {
         Tavar2::find($request->id)->update($request->all());
+        Tavar2p::find($request->id)->update([
+            'tavarp_id'=>$request->tavar_id,
+            'name'=>$request->name,
+        ]);
         $data = Tavar2::find($request->id);
         return response()->json(['code'=>200, 'msg'=>'Мувофакиятли янгиланди','data' => $data], 200);
     }
@@ -179,6 +183,7 @@ class KlentServis extends KlentServis2
     public function updateer2($request)
     {
         Tavar::find($request->id)->update($request->all());
+        Tavarp::find($request->id)->update($request->all());
         $data = Tavar::find($request->id);
         return response()->json(['code'=>200, 'msg'=>'Мувофакиятли янгиланди','data' => $data], 200);
     }
@@ -240,36 +245,36 @@ class KlentServis extends KlentServis2
                         ->where('adress', $value["adress"])
                         ->where('tavar2_id', $value["tavar2_id"])
                         ->first();
-                $updates = Updatetavr::where('tavar_id', $value["tavar_id"])
-                        ->where('ichkitavar_id', $data->id)
-                        ->where('adress', $value["adress"])
-                        ->where('tavar2_id', $value["tavar2_id"])
-                        ->first();
-                if($updates){
-                    Updatetavr::where('tavar_id', $value["tavar_id"])
-                            ->where('ichkitavar_id', $data->id)
-                            ->where('adress', $value["adress"])
-                            ->where('tavar2_id', $value["tavar2_id"])
-                            ->update([
-                                'raqam'=>$value["raqam"],
-                                'hajm'=>$value["hajm"],
-                                'summa'=>$value["summa"],
-                                'summa2'=>$value["summa2"],
-                                'summa3'=>$value["summa3"],
-                            ]);
-                }else{
-                    Updatetavr::create([
-                        'tavar_id'=>$value["tavar_id"],
-                        'ichkitavar_id'=>$data->id,
-                        'adress'=>$value["adress"],
-                        'tavar2_id'=>$value["tavar2_id"],
-                        'raqam'=>$value["raqam"],
-                        'hajm'=>$value["hajm"],
-                        'summa'=>$value["summa"],
-                        'summa2'=>$value["summa2"],
-                        'summa3'=>$value["summa3"],
-                    ]);
-                }
+                // $updates = Updatetavr::where('tavar_id', $value["tavar_id"])
+                //         ->where('ichkitavar_id', $data->id)
+                //         ->where('adress', $value["adress"])
+                //         ->where('tavar2_id', $value["tavar2_id"])
+                //         ->first();
+                // if($updates){
+                //     Updatetavr::where('tavar_id', $value["tavar_id"])
+                //             ->where('ichkitavar_id', $data->id)
+                //             ->where('adress', $value["adress"])
+                //             ->where('tavar2_id', $value["tavar2_id"])
+                //             ->update([
+                //                 'raqam'=>$value["raqam"],
+                //                 'hajm'=>$value["hajm"],
+                //                 'summa'=>$value["summa"],
+                //                 'summa2'=>$value["summa2"],
+                //                 'summa3'=>$value["summa3"],
+                //             ]);
+                // }else{
+                //     Updatetavr::create([
+                //         'tavar_id'=>$value["tavar_id"],
+                //         'ichkitavar_id'=>$data->id,
+                //         'adress'=>$value["adress"],
+                //         'tavar2_id'=>$value["tavar2_id"],
+                //         'raqam'=>$value["raqam"],
+                //         'hajm'=>$value["hajm"],
+                //         'summa'=>$value["summa"],
+                //         'summa2'=>$value["summa2"],
+                //         'summa3'=>$value["summa3"],
+                //     ]);
+                // }
                 Trvark::create([
                         'tavar_id'=>$value["tavar_id"],
                         'adress'=>$value["adress"],
@@ -294,36 +299,36 @@ class KlentServis extends KlentServis2
                     'summa2'=>$value["summa2"],
                     'summa3'=>$value["summa3"],
                 ]);
-                $updates = Updatetavr::where('tavar_id', $value["tavar_id"])
-                            ->where('ichkitavar_id', $data->id)
-                            ->where('adress', $value["adress"])
-                            ->where('tavar2_id', $value["tavar2_id"])
-                            ->first();
-                if($updates){
-                    Updatetavr::where('tavar_id', $value["tavar_id"])
-                            ->where('ichkitavar_id', $data->id)
-                            ->where('adress', $value["adress"])
-                            ->where('tavar2_id', $value["tavar2_id"])
-                            ->update([
-                                'raqam'=>$value["raqam"],
-                                'hajm'=>$value["hajm"],
-                                'summa'=>$value["summa"],
-                                'summa2'=>$value["summa2"],
-                                'summa3'=>$value["summa3"],
-                            ]);
-                }else{
-                    Updatetavr::create([
-                        'tavar_id'=>$value["tavar_id"],
-                        'ichkitavar_id'=>$data->id,
-                        'adress'=>$value["adress"],
-                        'tavar2_id'=>$value["tavar2_id"],
-                        'raqam'=>$value["raqam"],
-                        'hajm'=>$value["hajm"],
-                        'summa'=>$value["summa"],
-                        'summa2'=>$value["summa2"],
-                        'summa3'=>$value["summa3"],
-                    ]);
-                }
+                // $updates = Updatetavr::where('tavar_id', $value["tavar_id"])
+                //             ->where('ichkitavar_id', $data->id)
+                //             ->where('adress', $value["adress"])
+                //             ->where('tavar2_id', $value["tavar2_id"])
+                //             ->first();
+                // if($updates){
+                //     Updatetavr::where('tavar_id', $value["tavar_id"])
+                //             ->where('ichkitavar_id', $data->id)
+                //             ->where('adress', $value["adress"])
+                //             ->where('tavar2_id', $value["tavar2_id"])
+                //             ->update([
+                //                 'raqam'=>$value["raqam"],
+                //                 'hajm'=>$value["hajm"],
+                //                 'summa'=>$value["summa"],
+                //                 'summa2'=>$value["summa2"],
+                //                 'summa3'=>$value["summa3"],
+                //             ]);
+                // }else{
+                //     Updatetavr::create([
+                //         'tavar_id'=>$value["tavar_id"],
+                //         'ichkitavar_id'=>$data->id,
+                //         'adress'=>$value["adress"],
+                //         'tavar2_id'=>$value["tavar2_id"],
+                //         'raqam'=>$value["raqam"],
+                //         'hajm'=>$value["hajm"],
+                //         'summa'=>$value["summa"],
+                //         'summa2'=>$value["summa2"],
+                //         'summa3'=>$value["summa3"],
+                //     ]);
+                // }
                 Trvark::create([
                     'tavar_id'=>$value["tavar_id"],
                     'adress'=>$value["adress"],
@@ -342,34 +347,34 @@ class KlentServis extends KlentServis2
 
     public function updates($request)
     {
-        $updatetavr = Updatetavr::where('ichkitavar_id', $request->id)->first();
-        $foo = Ichkitavar::find($request->id);
-        $fff = Tavar2::find($foo->tavar2_id);
-        $h1 = $foo->hajm - $updatetavr->hajm + $request->hajm;
-        $sum2 = $foo->summa2 - $updatetavr->summa2 + $request->summa2;
-        $sum3 = $foo->summa3 - $updatetavr->summa3 + $request->summa3;        
+        // $updatetavr = Updatetavr::where('ichkitavar_id', $request->id)->first();
+        // $foo = Ichkitavar::find($request->id);
+        $fff = Tavar2::find($request->tavar2_id);
+        // $h1 = $foo->hajm - $updatetavr->hajm + $request->hajm;
+        // $sum2 = $foo->summa2 - $updatetavr->summa2 + $request->summa2;
+        // $sum3 = $foo->summa3 - $updatetavr->summa3 + $request->summa3;        
         $data = Ichkitavar::find($request->id)->update([
             'tavar_id'=>$request->tavar_id,
             'adress'=>$request->adress,
             'tavar2_id'=>$request->tavar2_id,
             'name'=>$fff->name,
             'raqam'=>$request->raqam,
-            'hajm'=>$h1,
-            'summa'=>$request->summa,
-            'summa2'=>$sum2,
-            'summa3'=>$sum3,
-        ]);
-        Updatetavr::where('ichkitavar_id', $request->id)->update([
-            'tavar_id'=>$request->tavar_id,
-            'ichkitavar_id'=>$request->id, 
-            'adress'=>$request->adress,
-            'tavar2_id'=>$request->tavar2_id,
-            'raqam'=>$request->raqam,
-            'hajm'=>$request->hajm, 
+            'hajm'=>$request->hajm,
             'summa'=>$request->summa,
             'summa2'=>$request->summa2,
             'summa3'=>$request->summa3,
         ]);
+        // Updatetavr::where('ichkitavar_id', $request->id)->update([
+        //     'tavar_id'=>$request->tavar_id,
+        //     'ichkitavar_id'=>$request->id, 
+        //     'adress'=>$request->adress,
+        //     'tavar2_id'=>$request->tavar2_id,
+        //     'raqam'=>$request->raqam,
+        //     'hajm'=>$request->hajm, 
+        //     'summa'=>$request->summa,
+        //     'summa2'=>$request->summa2,
+        //     'summa3'=>$request->summa3,
+        // ]);
         Trvark::where('ichkitavar_id', $request->id)->update([
             'tavar_id'=>$request->tavar_id,
             'adress'=>$request->adress,
@@ -421,17 +426,17 @@ class KlentServis extends KlentServis2
             'kurs'=>$data->kurs, 
             'kurs2'=>$data->kurs2
         ]);
-        Updatetavr::create([
-            'tavar_id'=>$data->tavar_id,
-            'ichkitavar_id'=>$a->id,
-            'adress'=>$data->adress,
-            'tavar2_id'=>$data->tavar2_id,
-            'raqam'=>$data->raqam,
-            'hajm'=>$data->hajm, 
-            'summa'=>$data->summa,
-            'summa2'=>$data->summa2,
-            'summa3'=>$data->summa3
-        ]);
+        // Updatetavr::create([
+        //     'tavar_id'=>$data->tavar_id,
+        //     'ichkitavar_id'=>$a->id,
+        //     'adress'=>$data->adress,
+        //     'tavar2_id'=>$data->tavar2_id,
+        //     'raqam'=>$data->raqam,
+        //     'hajm'=>$data->hajm, 
+        //     'summa'=>$data->summa,
+        //     'summa2'=>$data->summa2,
+        //     'summa3'=>$data->summa3
+        // ]);
         Trvark::create([
             'tavar_id'=>$data->tavar_id,
             'adress'=>$data->adress,
@@ -474,15 +479,17 @@ class KlentServis extends KlentServis2
     {
         foreach ($request->addmore as $value) {
             $data = Adress::create($value);
+            DB::table('adresseps')->insert($value);
         }
-        if($data){
-            return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $data], 200);
-        }
+        return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $data], 200);
+        
     }
 
     public function pastavkaupdate($request)
     {
+        unset($request["_token"]);
         Adress::find($request->id)->update($request->all());
+        DB::table('adresseps')->where('id', $request->id)->update($request->all());       
         $data = Adress::find($request->id);
         return response()->json(['code'=>201, 'msg'=>'Мувофакиятли янгиланди','data' => $data], 201);
     }
@@ -490,13 +497,14 @@ class KlentServis extends KlentServis2
     public function deletew4($id)
     {
         Adress::find($id)->delete($id);
+        DB::table('adresseps')->where('id' ,$id)->delete($id);
         return response()->json(['msg'=>'Мувофакиятли очирилди']);
     }
 
     public function clents()
     {
         $user = User::paginate(10);
-               $dt= Carbon::now('Asia/Tashkent');  
+        $dt= Carbon::now('Asia/Tashkent');  
         $sana = $dt->toDateString();
         $sana2 = Clentmalumot::where('sana', $sana)->first();
         if(Session::has('IDIE')){

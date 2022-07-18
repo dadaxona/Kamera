@@ -566,7 +566,9 @@
         function reflesh(){
             location.reload(true);
         }
-
+        // setInterval(function() {
+        //     location.href="logaut"
+        // }, 10800000);
     </script>
     <!-- Required Jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>

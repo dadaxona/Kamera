@@ -941,7 +941,7 @@ $( function() {
         id: id
       },
       success: function(response) {
-        $("#ichki_id").val(response.ichkitavar_id);
+        $("#ichki_id").val(response.id);
         $("#tavar_id2").val(response.tavar_id);
         $("#adress2").val(response.adress);
         $("#tavar2_id2").val(response.tavar2_id);
